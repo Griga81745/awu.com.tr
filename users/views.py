@@ -1,4 +1,4 @@
-from . import forms
+from . import forms, mixins as custom_mixins
 
 from django.views import generic
 from django.shortcuts import render
@@ -11,11 +11,15 @@ from django.http.response import HttpResponse
 User = get_user_model()
 
 
-class RegisterView(generic.View):
+class RegisterView(custom_mixins.AlreadyLoggedInMixin, generic.View):
   form_class = forms.RegisterForm
   template_name = 'users/register.html'
+  logged_in_regirect_url = None
 
   def get(self, request: HttpRequest) -> HttpResponse:
+    if (result := super().get(request)):
+      return result
+
     return render(request, self.template_name, {'form': self.form_class()})
 
   def post(self, request: HttpRequest) -> HttpResponse:
@@ -35,11 +39,15 @@ class RegisterView(generic.View):
     return HttpResponse('Success')
 
 
-class LoginView(generic.View):
+class LoginView(custom_mixins.AlreadyLoggedInMixin, generic.View):
   form_class = forms.LoginForm
   template_name = 'users/login.html'
+  logged_in_regirect_url = None
 
   def get(self, request: HttpRequest) -> HttpResponse:
+    if (result := super().get(request)):
+      return result
+
     return render(request, self.template_name, {'form': self.form_class()})
 
   def post(self, request: HttpRequest) -> HttpResponse:
