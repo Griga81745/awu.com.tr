@@ -21,8 +21,8 @@
             class="logo_sticky"></a>
       </figure>
       <div class="access_social">
-        <a href="#0" class="social_bt facebook">Register with Facebook</a>
-        <a href="#0" class="social_bt google">Register with Google</a>
+        <a href="#" class="social_bt facebook">Register with Facebook</a>
+        <a href="#" class="social_bt google">Register with Google</a>
       </div>
       <div class="divider"><span>Or</span></div>
       <form action="{% url 'users:register' %}" method="POST" autocomplete="off">
@@ -50,7 +50,7 @@
         </div>
         <div id="pass-info" class="clearfix"></div>
         <button type="submit" class="btn_1 rounded full-width">Register Now!</button>
-        <div class="text-center add_top_10">Already have an acccount? <strong><a href="#">Register</a></strong>
+        <div class="text-center add_top_10">Already have an acccount? <strong><a href="{% url 'users:login' %}">Login!</a></strong>
       </form>
       <div class="copy">© 2020 Prozim</div>
     </aside>
