@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 User = get_user_model()
 
 
-class RegisterForm(custom_mixins.AddClassName, forms.Form):
+class RegisterForm(custom_mixins.AddClassNameMixin, forms.Form):
   first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name'}))
   last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
   email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
@@ -32,7 +32,7 @@ class RegisterForm(custom_mixins.AddClassName, forms.Form):
     return email
 
 
-class LoginForm(custom_mixins.AddClassName, forms.Form):
+class LoginForm(custom_mixins.AddClassNameMixin, forms.Form):
   email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email', 'id': 'email'}))
   password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'id': 'password'}))
   remember_me = forms.BooleanField(widget=forms.CheckboxInput(), required=False)

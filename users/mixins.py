@@ -1,7 +1,7 @@
 from typing import Tuple, Dict
 
 
-class AddClassName:
+class AddClassNameMixin:
   class_name: str = 'form-control'
 
   def __init__(self, *args: Tuple, **kwargs: Dict) -> None:
