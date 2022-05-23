@@ -13,3 +13,16 @@ class PostAdmin(admin.ModelAdmin):
   )
 
   readonly_fields = ('slug', 'creation_date')
+
+
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+  search_fields = ('content',)
+  list_display = ('user', 'post', 'creation_date')
+  list_filter = ('creation_date',)
+
+  fieldsets = (
+    (None, {'fields': ('user', 'post', 'content', 'creation_date')}),
+  )
+
+  readonly_fields = ('creation_date',)
