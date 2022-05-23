@@ -2,8 +2,8 @@ from . import forms
 
 from django.views import generic
 from django.shortcuts import render
-from django.contrib.auth import get_user_model, login
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model, authenticate, login
 
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
@@ -29,6 +29,33 @@ class RegisterView(generic.View):
         password=make_password(form.cleaned_data['password1'])
       )
       login(request, user)
+    else:
+      return render(request, self.template_name, {'form': form})
+
+    return HttpResponse('Success')
+
+
+class LoginView(generic.View):
+  form_class = forms.LoginForm
+  template_name = 'users/login.html'
+
+  def get(self, request: HttpRequest) -> HttpResponse:
+    return render(request, self.template_name, {'form': self.form_class()})
+
+  def post(self, request: HttpRequest) -> HttpResponse:
+    form = self.form_class(request.POST)
+
+    if form.is_valid():
+
+      if not (user := authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'])):
+        form.add_error(field='email', error='Incorrect Email or Password')
+        return render(request, self.template_name, {'form': form})
+
+      login(request, user)
+
+      if not form.cleaned_data['remember_me']:
+        request.session.set_expiry(0)
+
     else:
       return render(request, self.template_name, {'form': form})
 
