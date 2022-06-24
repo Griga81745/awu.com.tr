@@ -4,6 +4,10 @@
 {% set header_class='header clearfix element_to_stick' %}
 {% set header__container_class='container-fluid' %}
 
+{% block title %}
+    Ana Sayfa
+{% endblock %}
+
 {% block styles %}
     <link href="{{ static('css/home.css') }}" rel="stylesheet">
 {% endblock %}
@@ -17,7 +21,7 @@
                     <div class="col-xl-9 col-lg-10">
                         <h1>Avukat Ara Ve Bul</h1>
                         <p>Avukatlarımızla Mesaj İle İletişime Geçerek Randevu Alın</p>
-                        <form method="post" action="{{ url('users:search') }}">
+                        <form action="{{ url('users:search') }}">
                             <div class="row no-gutters custom-search-input">
                                 <div class="col-md-9">
                                     <div class="form-group">
