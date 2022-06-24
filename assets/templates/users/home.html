@@ -17,7 +17,7 @@
                     <div class="col-xl-9 col-lg-10">
                         <h1>Avukat Ara Ve Bul</h1>
                         <p>Avukatlarımızla Mesaj İle İletişime Geçerek Randevu Alın</p>
-                        <form method="post" action="http://www.ansonika.com/prozim/grid-listing-1.html">
+                        <form method="post" action="{{ url('users:search') }}">
                             <div class="row no-gutters custom-search-input">
                                 <div class="col-md-9">
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                 {{ lawyer_card() }}                
             </div>
             <!-- /row -->
-            <p class="text-center"><a href="grid-listing-1.html" class="btn_1 medium">Daha Fazla Avukat Bul <!DOCTYPE html>
+            <p class="text-center"><a href="{{ url('users:search') }}" class="btn_1 medium">Daha Fazla Avukat Bul <!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -105,7 +105,7 @@
                             <p>Connect with your professional booking an appointment, via chat or video call!</p>
                         </li>
                     </ul>
-                    <p class="add_top_30"><a href="grid-listing-1.html" class="btn_1">Bizimle Başla !</a></p>
+                    <p class="add_top_30"><a href="{{ url('users:search') }}" class="btn_1">Bizimle Başla !</a></p>
                 </div>
                 <!-- /row -->
             </div>
@@ -120,7 +120,7 @@
                     <div class="ribbon_promo"><span>Free</span></div>
                     <h3>Bizimle Çalışmak İstermisin?</h3>
                     <p>Çevrimiçi görünürlüğünüzü artırmak için bize katılın. Profesyonel hizmetlere veya tavsiyeye ihtiyaç duyan daha da fazla müşteriye erişim kazanacaksınız.</p>
-                    <a href="submit-professional.html" class="btn_1">Daha Fazla Öğren !</a>
+                    <a href="{{ url('users:search') }}" class="btn_1">Daha Fazla Öğren !</a>
                 </div>
             </div>
         </div>

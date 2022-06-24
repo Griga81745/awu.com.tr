@@ -1,4 +1,5 @@
 {% extends 'origin/base.html' %}
+{% from 'users/_macros.html' import lawyer_card  %}
 
 {% set header_class='header_in clearfix' %}
 {% set header__container_class='container' %}
@@ -17,17 +18,17 @@
         <!-- /filters_full -->
         <div class="container margin_30_40">
             <div class="page_header">
-                <h1>Doctors</h1><span>: 814 found</span>
+                <h1>814</h1><span> sonuç bulundu.</span>
             </div>
             <div class="row">
                 <aside class="col-lg-3" id="sidebar_fixed">
                     <div class="filter_col">
-                        <input type="text" class="form-control" placeholder="Search again...">
+                        <input type="text" class="form-control" placeholder="Anahtar Kelimeler...">
                     </div>
                     <div class="filter_col">
                         <div class="inner_bt"><a href="#" class="open_filters"><i class="icon_close"></i></a></div>
                         <div class="filter_type">
-                            <h4><a href="#filter_1" data-toggle="collapse" class="opened">Categories</a></h4>
+                            <h4><a href="#filter_1" data-toggle="collapse" class="opened">Alanlar</a></h4>
                             <div class="collapse show" id="filter_1">
                                 <ul>
                                     <li>
@@ -165,205 +166,15 @@
                 </aside>
                 <div class="col-lg-9">
                     <div class="row grid_sidebar">
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Maria Cornfield</h3>
-                                            <small>Pediatrician, Psychologist ...</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Lucy Shoemaker</h3>
-                                            <small>Autoimmune Diseases</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Luke Lachinet</h3>
-                                            <small>Obstetrician, Gynecologist...</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Marta Rainwater</h3>
-                                            <small>Dermatologist</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Tom Manzone</h3>
-                                            <small>Psychologist</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Rose Cornfield</h3>
-                                            <small>General Medicine</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Maria Cornfield</h3>
-                                            <small>Cardiologist</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Jim Jake</h3>
-                                            <small>Obstetrician, Gynecologist...</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
-                                    <a href="detail-page.html" class="strip_info">
-                                        <div class="item_title">
-                                            <h3>Dr. Barbara Ocean</h3>
-                                            <small>Cardiologist</small>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <ul>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
-                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
-                                    <li>
-                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /strip grid -->
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
+                        {{ lawyer_card() }}
                     </div>
                     <!-- /row -->
                     <div class="pagination_fg">

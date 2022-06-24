@@ -2,9 +2,13 @@
 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
     <div class="strip">
         <figure>
-            <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
-            <img src="{{ static('img/lazy-placeholder.png') }}" data-src="{{ static('img/home_section_1.jpg') }}" class="img-fluid lazy" alt="">
-            <a href="detail-page.html" class="strip_info">
+            <a href="{{ url('users:profile-detail') }}" class="wish_bt"><i class="icon_heart"></i></a>
+            <img 
+                src="{{ static('img/lazy-placeholder.png') }}" 
+                data-src="{{ static('img/home_section_1.jpg') }}" 
+                class="img-fluid lazy" 
+                alt="">
+            <a href="{{ url('users:profile-detail') }}" class="strip_info">
                 <div class="item_title">
                     <h3>Maria Watson</h3>
                     <small>Hukuk, Aile ...</small>
