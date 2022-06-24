@@ -1,0 +1,104 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.box_booking--custom{
+	overflow: hidden;
+}
+
+.box_booking__options{
+	padding: 1em;
+	max-height: 80vh;
+	overflow-y: scroll;
+}
+
+.box_booking__option{
+	margin-bottom: 1em;
+	border-radius: 0.2em;
+	padding: 1em;
+	background: rgba(0,0,0,0.05);
+	gap: 1em;
+	color: initial;
+	transition: .2s;
+}
+
+.box_booking__option:hover{
+	opacity: 0.8;
+}
+
+.custom-chat{
+	display: flex;
+}
+
+.custom-chat--unanswered{
+	background: rgba(0,0,0,0.2);
+}
+
+.custom-chat__thumbnail{
+}
+
+.custom-chat__thumbnail-img{
+	background: black;
+	border-radius: 50%;
+	height: 3em;
+	width: 3em;
+
+}
+
+.custom-chat__stuff{
+	flex-basis: 100%;
+	overflow: hidden;
+}
+
+.custom-chat__name, .custom-chat__message{
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.custom-chat__name{
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+
+.custom-chat__message{
+	font-size: 0.9em;
+	opacity: .8;
+}
+
+.custom-chat-window{
+	height: 90vh;
+	border-radius: 0.5em;
+	padding: 1em;
+	background: rgba(0,0,0,0.05);
+}
+
+.custom-chat-window--input{
+
+}
+
+.custom-chat-window--messages{
+	
+}
+
+.custom-chat-window--message{
+
+}

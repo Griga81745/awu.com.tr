@@ -1,0 +1,36 @@
+{% extends 'origin/base.html' %}
+
+{% set header_class='header clearfix element_to_stick' %}
+{% set header__container_class='container-fluid' %}
+
+{% block title %}
+	Sayfa Bulunamadı
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ static('css/error.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<main>
+        <div id="error_page">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-xl-7 col-lg-9">
+                        <figure><img src="{{ static('img/404.svg') }}" alt="" class="img-fluid"></figure>
+                        <p>Üzgünüz, maalesef ulaşmaya çalıştığınız sayfa bulunamıyor.</p>
+                        <form>
+                            <div class="search_bar">
+                                <input type="text" class="form-control" placeholder="Ne aramıştınız?">
+                                <input type="submit" value="Ara">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /error -->
+    </main>
+{% endblock %}

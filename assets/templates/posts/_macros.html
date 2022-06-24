@@ -1,0 +1,33 @@
+{% macro post_listed() -%}
+    <div class="col-md-6">
+        <article class="blog">
+            <figure>
+                <a href="{{ url('blog:post') }}"><img src="{{ static('img/blog-1.jpg') }}" alt="">
+                    <div class="preview"><span>Daha Fazla Oku</span></div>
+                </a>
+            </figure>
+            <div class="post_info">
+                <small><i class="fas fa-calendar"></i> 20.01.2017</small>
+                <h2><a href="{{ url('blog:post') }}">Ea exerci option hendrerit</a></h2>
+                <p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
+                <ul>
+                    <li>
+                        <div class="thumb"><img src="{{ static('img/avatar.jpg') }}" alt=""></div> Admin
+                    </li>
+                    <li><i class="icon_comment_alt"></i>20</li>
+                </ul>
+            </div>
+        </article>
+        <!-- /article -->
+    </div>
+{%- endmacro %}
+
+{% macro post_sidebar() -%}
+    <li>
+        <div class="alignleft">
+            <a href="{{ url('blog:post') }}"><img src="{{ static('img/blog-5.jpg') }}" alt=""></a>
+        </div>
+        <small>Category - 11.08.2016</small>
+        <h3><a href="{{ url('blog:post') }}" title="">Verear qualisque ex minimum...</a></h3>
+    </li>
+{% endmacro -%}

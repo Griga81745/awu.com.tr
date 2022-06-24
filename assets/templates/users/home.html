@@ -1,0 +1,130 @@
+{% extends 'origin/base.html' %}
+{% from 'users/_macros.html' import lawyer_card  %}
+
+{% set header_class='header clearfix element_to_stick' %}
+{% set header__container_class='container-fluid' %}
+
+{% block styles %}
+    <link href="{{ static('css/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="hero_single version_2">
+        <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.4)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-10">
+                        <h1>Avukat Ara Ve Bul</h1>
+                        <p>Avukatlarımızla Mesaj İle İletişime Geçerek Randevu Alın</p>
+                        <form method="post" action="http://www.ansonika.com/prozim/grid-listing-1.html">
+                            <div class="row no-gutters custom-search-input">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Aradığınızı Yazın...">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="submit" value="Bul">
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="search_trends">
+                                <h5>Şuanda Popüler:</h5>
+                                <ul>
+                                    <li><a href="#0">doctor</a></li>
+                                    <li><a href="#0">lawyer</a></li>
+                                    <li><a href="#0">teacher</a></li>
+                                    <li><a href="#0">psychologist</a></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+    </div>
+    <!-- /hero_single -->
+    <div class="bg_gray">
+        <div class="container margin_60_40">
+            <div class="main_title center">
+                <span><em></em></span>
+                <h2>En İyi Avukatlarımız</h2>
+                <p></p>
+            </div>
+            <div class="row">
+                {{ lawyer_card() }}
+                {{ lawyer_card() }}
+                {{ lawyer_card() }}
+                {{ lawyer_card() }}
+                {{ lawyer_card() }}
+                {{ lawyer_card() }}                
+            </div>
+            <!-- /row -->
+            <p class="text-center"><a href="grid-listing-1.html" class="btn_1 medium">Daha Fazla Avukat Bul <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+            </head>
+            <body>
+                
+            </body>
+            </html></a></p>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /container -->
+    <div class="bg_gray">
+        <div class="container margin_60_40">
+            <div class="main_title center add_bottom_10">
+                <span><em></em></span>
+                <h2>Biz Nasıl Çalışıyoruz?</h2>
+                <p></p>
+            </div>
+            <div class="row justify-content-md-center how_2">
+                <div class="col-lg-5 text-center">
+                    <figure>
+                        <img src="{{ static('img/home_section_2.jpg') }}" data-src="{{ static('img/home_section_2.jpg') }}" alt="" class="img-fluid lazy" style="width: 100%; height: 100%">
+                    </figure>
+                </div>
+                <div class="col-lg-5">
+                    <ul>
+                        <li>
+                            <h3><span>#01.</span> Platformumuzda Arama Yap</h3>
+                            <p>Search over 12.000 verifyed professionals that match your criteria.</p>
+                        </li>
+                        <li>
+                            <h3><span>#02.</span> Avukat Profillerimizi İncele</h3>
+                            <p>View professional introduction and read reviews from other customers.</p>
+                        </li>
+                        <li>
+                            <h3><span>#03.</span> Randevu Al Ve En İyi Avukatlarla Görüş</h3>
+                            <p>Connect with your professional booking an appointment, via chat or video call!</p>
+                        </li>
+                    </ul>
+                    <p class="add_top_30"><a href="grid-listing-1.html" class="btn_1">Bizimle Başla !</a></p>
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_gray -->
+    <div class="call_section version_2 lazy" data-bg="#">
+        <div class="container clearfix">
+            <div class="col-lg-5 col-md-6 float-right wow">
+                <div class="box_1">
+                    <div class="ribbon_promo"><span>Free</span></div>
+                    <h3>Bizimle Çalışmak İstermisin?</h3>
+                    <p>Çevrimiçi görünürlüğünüzü artırmak için bize katılın. Profesyonel hizmetlere veya tavsiyeye ihtiyaç duyan daha da fazla müşteriye erişim kazanacaksınız.</p>
+                    <a href="submit-professional.html" class="btn_1">Daha Fazla Öğren !</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/call_section-->
+</main>
+{% endblock %}

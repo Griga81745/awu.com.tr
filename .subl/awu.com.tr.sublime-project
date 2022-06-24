@@ -1,0 +1,30 @@
+{
+	"folders":
+	[
+		// {
+		// 	"path":"../"
+		// }
+		{
+			"path": "../settings"
+		},
+		{
+			"path": "../apps/posts"
+		},
+		{
+			"path": "../apps/users"
+		},
+		{
+			"path": "../apps/we"
+		},
+		{
+			"path": "../settings/static"
+		},
+		{
+			"path": "../assets/templates"
+		},
+		{
+			"path": "../templatetags",
+			"folder_exclude_patterns": ["__pycache__"]
+		}
+	]
+}

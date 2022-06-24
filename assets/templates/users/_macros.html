@@ -1,0 +1,31 @@
+{% macro lawyer_card() -%}
+<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+    <div class="strip">
+        <figure>
+            <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+            <img src="{{ static('img/lazy-placeholder.png') }}" data-src="{{ static('img/home_section_1.jpg') }}" class="img-fluid lazy" alt="">
+            <a href="detail-page.html" class="strip_info">
+                <div class="item_title">
+                    <h3>Maria Watson</h3>
+                    <small>Hukuk, Aile ...</small>
+                </div>
+            </a>
+        </figure>
+        <ul>
+            <li>
+                <a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Randevu Al">
+                    <i class="fas fa-comment"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Sitesini Ziyaret Et">
+                    <i class="fa-solid fa-earth-africa"></i>
+                </a>
+            </li>
+            <li>
+                <div class="score"><span>50$ - konsültasyon<em>350 Yorum</em></span><strong>5.0</strong></div>
+            </li>
+        </ul>
+    </div>
+</div>
+{%- endmacro %}

@@ -1,0 +1,47 @@
+{% extends 'origin/base.html' %}
+{% from 'posts/_macros.html' import post_listed, post_sidebar %}
+
+{% set header_class='header_in shadow element_to_stick clearfix' %}
+{% set header__container_class='container' %}
+
+{% block title %}
+	Blog
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ static('css/blog.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<main class="bg_color">
+
+		<div class="container margin_45_40">			
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="row">
+						{{  post_listed() }}
+						{{  post_listed() }}
+						{{  post_listed() }}
+						{{  post_listed() }}
+						{{  post_listed() }}						
+					</div>
+					<!-- /row -->
+
+					<div class="pagination_fg">
+					  <a href="#">&laquo;</a>
+					  <a href="#" class="active">1</a>
+					  <a href="#">2</a>
+					  <a href="#">3</a>
+					  <a href="#">4</a>
+					  <a href="#">5</a>
+					  <a href="#">&raquo;</a>
+					</div>
+
+				</div>
+				{% include 'posts/sidebar.html' %}
+			</div>
+			<!-- /row -->	
+		</div>
+		<!-- /container -->		
+	</main>
+{% endblock %}

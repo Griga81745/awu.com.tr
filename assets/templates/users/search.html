@@ -1,0 +1,400 @@
+{% extends 'origin/base.html' %}
+
+{% set header_class='header_in clearfix' %}
+{% set header__container_class='container' %}
+
+{% block title %}
+    Search For Lawyer
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ static('css/listing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main class="bg_color">
+       
+        <!-- /filters_full -->
+        <div class="container margin_30_40">
+            <div class="page_header">
+                <h1>Doctors</h1><span>: 814 found</span>
+            </div>
+            <div class="row">
+                <aside class="col-lg-3" id="sidebar_fixed">
+                    <div class="filter_col">
+                        <input type="text" class="form-control" placeholder="Search again...">
+                    </div>
+                    <div class="filter_col">
+                        <div class="inner_bt"><a href="#" class="open_filters"><i class="icon_close"></i></a></div>
+                        <div class="filter_type">
+                            <h4><a href="#filter_1" data-toggle="collapse" class="opened">Categories</a></h4>
+                            <div class="collapse show" id="filter_1">
+                                <ul>
+                                    <li>
+                                        <label class="container_check">Psychologist<small>12</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Dermatologist <small>24</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Cardiologist <small>23</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">General Medicine <small>11</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Gynecologist <small>18</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Autoimmune Deseas <small>12</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Pediatrician <small>15</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /filter_type -->
+                        </div>
+                        <!-- /filter_type -->
+                        <div class="filter_type">
+                            <h4><a href="#filter_2" data-toggle="collapse" class="closed">Rating</a></h4>
+                            <div class="collapse" id="filter_2">
+                                <ul>
+                                    <li>
+                                        <label class="container_check">Superb 9+ <small>06</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Very Good 8+ <small>12</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Good 7+ <small>17</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">Pleasant 6+ <small>43</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /filter_type -->
+                        <div class="filter_type">
+                            <h4><a href="#filter_3" data-toggle="collapse" class="closed">Distance</a></h4>
+                            <div class="collapse" id="filter_3">
+                                <div class="range_input">Radius around destination <span></span> km</div>
+                                <div class="add_bottom_15"><input type="range" min="10" max="100" step="10" value="30" data-orientation="horizontal"></div>
+                            </div>
+                        </div>
+                        <!-- /filter_type -->
+                        <div class="filter_type">
+                            <h4><a href="#filter_4" data-toggle="collapse" class="closed">Price</a></h4>
+                            <div class="collapse" id="filter_4">
+                                <ul>
+                                    <li>
+                                        <label class="container_check">$0 — $50<small>11</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">$50 — $100<small>08</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">$100 — $150<small>05</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container_check">$150 — $200<small>18</small>
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="container_check">Bedava Görüşme
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <!-- /filter_type -->
+                        <div class="buttons">
+                            <div class="d-flex" style="gap:5px">
+                                <a href="#0" class="btn_1 full-width">Filter</a>
+                                <a href="#0" class="btn_1 full-width" style="background: black;">Filtre Kaldir</a>                                    
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="col-lg-9">
+                    <div class="row grid_sidebar">
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Maria Cornfield</h3>
+                                            <small>Pediatrician, Psychologist ...</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Lucy Shoemaker</h3>
+                                            <small>Autoimmune Diseases</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Luke Lachinet</h3>
+                                            <small>Obstetrician, Gynecologist...</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Marta Rainwater</h3>
+                                            <small>Dermatologist</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Tom Manzone</h3>
+                                            <small>Psychologist</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Rose Cornfield</h3>
+                                            <small>General Medicine</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Maria Cornfield</h3>
+                                            <small>Cardiologist</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Video Call"><i class="icon-videocam"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Jim Jake</h3>
+                                            <small>Obstetrician, Gynecologist...</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                            <div class="strip">
+                                <figure>
+                                    <a href="#0" class="wish_bt"><i class="icon_heart"></i></a>
+                                    <img src="{{ static('img/lazy-placeholder.png') }}" data-src="#" class="img-fluid lazy" alt="">
+                                    <a href="detail-page.html" class="strip_info">
+                                        <div class="item_title">
+                                            <h3>Dr. Barbara Ocean</h3>
+                                            <small>Cardiologist</small>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <ul>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Appointment"><i class="icon-users"></i></a></li>
+                                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Available Chat"><i class="icon-chat"></i></a></li>
+                                    <li>
+                                        <div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /strip grid -->
+                    </div>
+                    <!-- /row -->
+                    <div class="pagination_fg">
+                        <a href="#">&laquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+                </div>
+                <!-- /col -->
+            </div>
+        </div>
+        <!-- /container -->
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ static('js/sticky_sidebar.min.js') }}"></script>
+    <script src="{{ static('js/specific_listing.min.js') }}"></script>
+    <script src="{{ static('js/isotope.min.js') }}"></script>
+    <script>
+    $(window).on("load", function() {
+        var $container = $('.isotope-wrapper');
+        $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+    });
+    $('.switch-field').on('click', 'input', 'change', function() {
+        var selector = $(this).attr('data-filter');
+        $('.isotope-wrapper').isotope({ filter: selector });
+    });
+    </script>
+{% endblock %}

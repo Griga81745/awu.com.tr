@@ -1,0 +1,99 @@
+<header class="{{ header_class }}">
+    <div class="{{ header__container_class }}">
+        <div id="logo">
+            <a href="{{ url('users:home') }}">
+                <img src="{{ static('img/logo_sticky.svg') }}" width="120" height="35" alt="">
+            </a>
+        </div>
+        {% if request.user.is_authenticated %}
+            <ul id="top_menu" class="drop_user">
+                <li>
+                    <div class="dropdown user clearfix">
+                        <a href="#" data-toggle="dropdown">
+                            <figure><img src="{{ request.user.avatar.url }}" alt=""></figure>
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                            <span style="background: lime; color: black; border-radius: 100px; padding: 0 6px">
+                                &nbsp;
+                            </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-content">
+                                <ul>
+                                    <li><a href="#0"><i class="icon_cog"></i>Profilim</a></li>
+                                    <li><a href="#0"><i class="icon_document"></i>Randevularım</a></li>
+                                    <li>
+                                        <a href="#0" style="white-space: nowrap;">
+                                            <i class="icon_mail"></i>
+                                            Mesajlarım
+                                            <sup style="background: lime; color: black; border-radius: 100px; padding: 0 2px">2</sup>
+                                        </a>
+                                    </li>
+                                    <li><a href="#0"><i class="icon_key"></i>Çıkış Yap</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /dropdown -->
+                </li>
+            </ul>
+        {% else %}
+            <ul id="top_menu">
+                <li><a href="{{ url('users:login') }}" class="btn_access">Giriş Yap</a></li>
+                <li><a href="{{ url('users:register') }}" class="btn_access green">Kayıt Ol</a></li>
+            </ul>
+        {% endif %}
+        <!-- /top_menu -->
+        <a href="#0" class="open_close">
+            <i class="icon_menu"></i><span>Menu</span>
+        </a>
+        <nav class="main-menu">
+            <div id="header_menu">
+                <a href="#0" class="open_close">
+                    <i class="icon_close"></i><span>Menu</span>
+                </a>
+                <a href="index-2.html"><img src="{{ static('img/logo.svg') }}" width="120" height="35" alt=""></a>
+            </div>
+            <ul>
+                <li class="submenu">
+                    <a href="{{ url('users:home') }}" class="show-submenu">Ana Sayfa</a>
+                </li>
+                <li class="submenu">
+                    <a href="{{ url('users:search') }}" class="show-submenu">Avukat Bul</a>
+                </li>
+                <li class="submenu">
+                    <a href="#0" class="show-submenu">Alanlar</a>
+                    <ul>
+                        <li><a href="#">Grid Listing Default</a></li>
+                        <li><a href="#">Grid Listing Isotope Sort</a></li>
+                        <li><a href="#">Grid Listing Filters Left</a></li>
+                        <li><a href="#">Listing Side Map</a></li>
+                        <li><a href="#">Detail page 1</a></li>
+                        <li><a href="#">Detail page 2</a></li>
+                        <li><a href="#">Detail page 3</a></li>
+                        <li class="third-level"><a href="#0">OpenStreetMap</a>
+                            <ul>
+                                <li><a href="#">Grid Listing</a></li>
+                                <li><a href="#">Listing Side Map</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Booking</a></li>
+                        <li><a href="#">Submit Professional</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Leave a Review</a></li>
+                        <li><a href="#">User Logged 2</a></li>
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="{{ url('we:faq') }}" class="show-submenu">S.S.S.</a>
+                </li>
+                <li class="submenu">
+                    <a href="#0" class="show-submenu">Kurumsal</a>
+                    <ul>
+                        <li><a href="{{ url('we:about-us') }}">Hakkımızda</a></li>
+                        <li><a href="{{ url('we:contact-us') }}">İletişim</a></li>                        
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

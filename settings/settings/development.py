@@ -1,7 +1,10 @@
 from .common import *
 
-DEBUG = True
+SECRET_KEY = 'secret-key'
+
 ALLOWED_HOSTS = ['*']
+
+
 
 DATABASES = {
   'default': {
