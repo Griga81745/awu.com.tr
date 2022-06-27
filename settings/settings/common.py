@@ -9,6 +9,8 @@ env.read_env(BASE_DIR/'.env')
 DEBUG = int(env('DEBUG')) 
 
 INSTALLED_APPS = [
+  'channels',
+  'rest_framework',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -19,6 +21,7 @@ INSTALLED_APPS = [
   'apps.we',
   'apps.users',
   'apps.posts',
+  'apps.messenger.apps.MessengerConfig'
 ]
 
 MIDDLEWARE = [
@@ -32,7 +35,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'settings.urls'
-WSGI_APPLICATION = 'settings.wsgi.application'
+ASGI_APPLICATION = 'settings.asgi.application'
 
 TEMPLATES = [
   {
@@ -93,3 +96,6 @@ MEDIA_ROOT = BASE_DIR / 'assets/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
+
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
