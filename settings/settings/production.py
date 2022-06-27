@@ -10,6 +10,9 @@ DATABASES = {
   }
 }
 
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+
 CHANNEL_LAYERS = {
   'default': {
     'BACKEND': 'channels_redis.core.RedisChannelLayer',
