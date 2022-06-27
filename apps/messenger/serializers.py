@@ -9,7 +9,7 @@ class NewMessageSerializer(serializers.Serializer):
   text = serializers.CharField(max_length=1000)
 
   def validate_chat_id(self, value: int) -> int:
-    if not (chat := models.Chat.objects.filter(id=value)):
+    if not (chat := models.Chat.objects.filter(id=value)):  # Валидация на дурака
       raise ValidationError('Chat does not exist')
 
     self.chat = chat[0]
