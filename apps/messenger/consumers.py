@@ -34,6 +34,9 @@ class ChatConsumer(custom_mixins.JsonParser, JsonWebsocketConsumer):
     self.accept()  # Принять соединение
 
   def disconnect(self, code):
+    if not self.scope['user'].is_authenticated:
+      return
+
     async_to_sync(self.channel_layer.group_discard)(  # Если пользователь отключился от сокета, значит его нужно удалить из группы (оффлайн)
       self.group_name,
       self.channel_name
