@@ -7,7 +7,9 @@ urlpatterns = [
   path('admin/', admin.site.urls),
   path('', include('apps.users.urls')),
   path('we/', include('apps.we.urls')),
-  path('blog/', include('apps.posts.urls'))
+  path('blog/', include('apps.posts.urls')),
+
+  path('api/', include('apps.api.urls'))
 ]
 
 handler404 = "settings.views.page_404"

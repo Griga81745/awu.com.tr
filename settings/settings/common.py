@@ -21,7 +21,8 @@ INSTALLED_APPS = [
   'apps.we',
   'apps.users',
   'apps.posts',
-  'apps.messenger.apps.MessengerConfig'
+  'apps.messenger.apps.MessengerConfig',
+  'apps.api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
