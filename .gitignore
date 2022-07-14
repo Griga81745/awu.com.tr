@@ -116,3 +116,11 @@ dmypy.json
 env.sh
 
 .env
+todo.txt
+migrations/
+
+assets/static/*
+assets/media/*
+
+!assets/media/.gitkeep
+!assets/static/.gitkeep

@@ -1,9 +1,13 @@
 import environ
 from pathlib import Path
 
+env = environ.Env(
+  DEBUG = (bool,False),
+  SECRET_KEY = (str,'secret-key')
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env = environ.Env()
 env.read_env(BASE_DIR/'.env')
 
 DEBUG = int(env('DEBUG')) 
