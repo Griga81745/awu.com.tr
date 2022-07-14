@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "../settings"
+		},
+		{
+			"path": "../apps/messenger"
+		},
+		{
+			"path": "../apps/api"
+		},
+		{
+			"path": "../apps/posts"
+		},
+		{
+			"path": "../apps/users"
+		},
+		{
+			"path": "../apps/we"
+		},
+		{
+			"path": "../settings/static"
+		},
+		{
+			"path": "../assets/templates"
+		},
+	],
+	"settings": {
+		"files.exclude":{
+			"__pycache__":true,
+			"migrations":true
+		},
+	}
+}

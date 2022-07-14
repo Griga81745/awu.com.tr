@@ -1,9 +1,14 @@
 from .manager import UserManager
 from typing import Tuple, Dict
+from autoslug import AutoSlugField
 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
+
+from taggit.managers import TaggableManager
 
 from django.core.validators import (
   RegexValidator,
@@ -12,6 +17,11 @@ from django.core.validators import (
 )
 
 phone_number_validator = RegexValidator(r'^(0|90)(\d{10})$')
+
+# менеджер для получения опубликованных постов
+class LawyerManager(models.Manager):
+	def get_queryset(self):
+		return super(LawyerManager,self).get_queryset().filter(is_lawyer=True)
 
 
 class User(AbstractUser):
@@ -22,6 +32,7 @@ class User(AbstractUser):
 
   is_lawyer = models.BooleanField('Is Lawyer?', default=False)
   free_consultacy = models.BooleanField('Free Consultacy?', default=False)
+  price_consultacy = models.IntegerField('Consultacy Price?', default=0)
   license_date = models.DateTimeField('License Date', blank=True, null=True)
   rate = models.FloatField('Rate', default=0.0, validators=(MinValueValidator(1), MaxValueValidator(5)))
 
@@ -29,13 +40,22 @@ class User(AbstractUser):
   website = models.URLField('Website URL', blank=True, null=True)
 
   avatar = models.ImageField('Avatar',upload_to='users/avatars',default='users/avatars/default.jpg')
+  bio = models.TextField('Bio?')
 
   USERNAME_FIELD = 'email'
   REQUIRED_FIELDS = []
+
   objects = UserManager()
+  lawyers = LawyerManager()  
+  tags = TaggableManager(blank=True)
+
+  def get_absolute_url(self):
+    return reverse('users:profile-detail',
+      args = [ self.id ]
+    )
 
   def calculate_rate(self) -> None:
-    self.rate = self.destination_reviews.all().aggregate(models.Avg('rate'))['rate__avg']
+    self.rate = round(self.destination_reviews.all().aggregate(models.Avg('rate'))['rate__avg'],1)
     self.save()
 
   def __str__(self) -> None:
@@ -47,7 +67,6 @@ class RateChoices(models.IntegerChoices):
   fine = 2
   good = 3
   great = 5
-
 
 class Review(models.Model):
   owner = models.ForeignKey(
@@ -64,25 +83,32 @@ class Review(models.Model):
     related_name='destination_reviews'
   )
 
-  content = models.TextField('Content')
+  MIN_CONTENT_LENGTH = 20
+  MAX_CONTENT_LENGTH = 200
+
+  content = models.TextField('Content', validators=(
+    MinLengthValidator(MIN_CONTENT_LENGTH),
+    MaxLengthValidator(MAX_CONTENT_LENGTH)
+  ))
+
   rate = models.IntegerField('Rate', choices=RateChoices.choices, validators=(MinValueValidator(1), MaxValueValidator(5)))
 
   creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
-  def clean(self) -> None:
+  def save(self, *args: Tuple, **kwargs: Dict) -> None:
+
+    if self.__class__.objects.filter(owner=self.owner,destination=self.destination) and not self.__class__.objects.filter(id=self.id):
+      raise ValidationError("İki kere yorum yapamazsınız !")
 
     if self.owner == self.destination:
-      raise ValidationError("User can't review themselves")
+      raise ValidationError("Kendinize yorum yapamazsınız !")
 
     if self.owner.is_lawyer:
-      raise ValidationError("Lawyers can't review")
+      raise ValidationError("Avukatlar yorum yapamazlar !")
 
     if not self.destination.is_lawyer:
-      raise ValidationError("Only lawyers can't be reviewed")
+      raise ValidationError("Sadece avukatlar yorum alabilirler !")
 
-    return super().clean()
-
-  def save(self, *args: Tuple, **kwargs: Dict) -> None:
     result = super().save(*args, **kwargs)
     self.destination.calculate_rate()
     return result

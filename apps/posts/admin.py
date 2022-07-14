@@ -9,7 +9,7 @@ class PostAdmin(admin.ModelAdmin):
   list_filter = ('published', 'creation_date')
 
   fieldsets = (
-    (None, {'fields': ('title', 'content', 'published', 'slug', 'creation_date')}),
+    (None, {'fields': ('title', 'content', 'published', 'slug', 'creation_date','tags')}),
   )
 
   readonly_fields = ('slug', 'creation_date')

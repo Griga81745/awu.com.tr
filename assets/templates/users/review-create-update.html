@@ -1,0 +1,69 @@
+{% extends 'origin/base.html' %}
+
+{% from 'origin/_macros.html' import alert %}
+
+{% set header_class='header_in shadow clearfix' %}
+{% set header__container_class='container' %}
+
+{% block title %}
+	Avukat Eleştiri Bırak
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ static('css/review.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<main class="bg_gray">
+		
+		<div class="container margin_60_40">
+		   <div class="row justify-content-center">
+				<div class="col-lg-8">
+					<form method="post" class="box_general write_review">
+						{{ csrf_input }}
+						{% if form.errors %}
+							{% for key,value in form.errors.items() %}
+								{{ alert('error',value.as_text()) }}
+							{% endfor %}
+                        {% endif %}
+						<h1 class="add_bottom_15">
+							{% if view_type=='create' %}
+		                        {% set lawyer=request.user.__class__.objects.get(id=request.path.rpartition('/')[2]) %}
+								"{{lawyer.first_name}} {{lawyer.last_name}}"
+								avukatımız için yorumunuz :
+							{% elif view_type=='update' %}
+								"{{ object.destination.first_name }} {{ object.destination.last_name }}"
+								avukatımız için yorumunuzu güncelliyorsunuz :
+							{% endif %}
+						</h1>
+						<label class="d-block add_bottom_15">Değerlendirme :</label>
+						<div class="row">
+							<div class="col-12 add_bottom_25">
+								{{ form.rate }}
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label>Yorumunuz :</label>
+							{{ form.content }}
+							<span>
+								{{ model.MIN_CONTENT_LENGTH }}/ 
+							<span id="textareaCount">
+							{{ object.content.__len__() if object else 0 }}
+							</span> 
+								/{{ model.MAX_CONTENT_LENGTH }}
+							</span>
+						</div>
+						<button type="submit" class="btn_1">Yorumu yayınla</a>
+					</form>
+				</div>
+		</div>
+		<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ static('js/specific_review.js') }}"></script>
+{% endblock %}

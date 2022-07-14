@@ -1,35 +1,90 @@
-{% macro lawyer_card() -%}
+{% macro lawyer_card(object) -%}
 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
     <div class="strip">
         <figure>
-            <a href="{{ url('users:profile-detail') }}" class="wish_bt"><i class="icon_heart"></i></a>
+            <a href="{{ object.get_absolute_url() }}" class="wish_bt"><i class="icon_heart"></i></a>
             <img 
                 src="{{ static('img/lazy-placeholder.png') }}" 
-                data-src="{{ static('img/home_section_1.jpg') }}" 
+                data-src="{{ object.avatar.url }}" 
                 class="img-fluid lazy" 
                 alt="">
-            <a href="{{ url('users:profile-detail') }}" class="strip_info">
+            <a href="{{ object.get_absolute_url() }}" class="strip_info">
                 <div class="item_title">
-                    <h3>Maria Watson</h3>
-                    <small>Hukuk, Aile ...</small>
+                    <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+                    <small>
+                        {% for index,tag in enumerate(object.tags.all()[:4]) %}
+                            {{ tag.name }} 
+                            {{ ',' if index+1 != object.tags.count()}}
+                        {% endfor %}
+                        {{ '...' if object.tags.all() }}
+                    </small>
                 </div>
             </a>
         </figure>
         <ul>
             <li>
-                <a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Randevu Al">
+                <a href="#" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Randevu Al">
                     <i class="fas fa-comment"></i>
                 </a>
             </li>
+            {% if object.website %}
+                <li>
+                    <a href="{{ object.website }}" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Sitesini Ziyaret Et">
+                        <i class="fa-solid fa-earth-africa"></i>
+                    </a>
+                </li>
+            {% endif %}
             <li>
-                <a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="bottom" title="Sitesini Ziyaret Et">
-                    <i class="fa-solid fa-earth-africa"></i>
-                </a>
-            </li>
-            <li>
-                <div class="score"><span>50$ - konsültasyon<em>350 Yorum</em></span><strong>5.0</strong></div>
+                <div class="score">
+                    <span>
+                        {{ object.price_consultacy + '$' if object.price_consultacy and not object.free_consultacy else 'Bedava'}} 
+                        - 
+                        konsültasyon
+                        <em>
+                        {{ object.destination_reviews.count() }} Yorum
+                        </em>
+                    </span>
+                    <strong>{{ object.rate }}</strong>
+                </div>
             </li>
         </ul>
     </div>
+</div>
+{%- endmacro %}
+
+{% macro review(review) -%}
+<div class="review_card">
+    <div class="row">
+        <div class="col-md-2 user_info">
+            <figure><img src="{{ review.owner.avatar.url }}" alt=""></figure>
+            <h5>{{ review.owner.first_name }}</h5>
+        </div>
+        <div class="col-md-10 review_content">
+            <div class="clearfix add_bottom_15">
+                <span class="rating">
+                    <small style="color:black">
+                        {% for i in range(review.rate) %}
+                            <i style="font-size:2em; color: orange" class="fas fa-star"></i>
+                        {% endfor %}
+                    </small>
+                </span>
+                <em>
+                    {{review.creation_date.date()}}
+                    &nbsp;
+                    <a 
+                        href="{{ url('users:review-update',args=[review.id]) }}" 
+                        class="fas fa-edit"></a>
+                    <a 
+                        href="{{ url('users:review-delete',args=[review.id]) }}" 
+                        style="" class="fas fa-trash-alt">
+                    </a>
+                </em>
+            </div>
+            <p>
+                {{review.content}}
+            </p>
+        </div>
+    </div>
+    <!-- /row -->
 </div>
 {%- endmacro %}

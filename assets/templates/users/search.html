@@ -1,5 +1,6 @@
 {% extends 'origin/base.html' %}
 {% from 'users/_macros.html' import lawyer_card  %}
+{% from 'origin/_macros.html' import pagination %}
 
 {% set header_class='header_in clearfix' %}
 {% set header__container_class='container' %}
@@ -166,26 +167,11 @@
                 </aside>
                 <div class="col-lg-9">
                     <div class="row grid_sidebar">
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
-                        {{ lawyer_card() }}
+                        {% for object in object_list %}
+                            {{ lawyer_card(object) }}
+                        {% endfor %}
                     </div>
-                    <!-- /row -->
-                    <div class="pagination_fg">
-                        <a href="#">&laquo;</a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">&raquo;</a>
-                    </div>
+                    {{ pagination(page_obj) }}
                 </div>
                 <!-- /col -->
             </div>

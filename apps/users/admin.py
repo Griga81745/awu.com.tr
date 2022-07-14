@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-
 @admin.register(get_user_model())
 class UserAdmin(BaseUserAdmin):
   ordering = ('email',)
@@ -14,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
 
   fieldsets = (
     ('Personal Info', {'fields': ('email', 'first_name', 'last_name', 'phone_number', 'whatsapp', 'city', 'website','avatar')}),
-    ('Additional Info', {'fields': ('is_lawyer', 'free_consultacy', 'license_date', 'last_login', 'date_joined', 'rate')}),
+    ('Additional Info', {'fields': ('is_lawyer', 'free_consultacy', 'license_date', 'last_login', 'date_joined', 'rate', 'tags')}),
     ('Staff Info', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions', 'groups'), 'classes': ('collapse',)})
   )
 

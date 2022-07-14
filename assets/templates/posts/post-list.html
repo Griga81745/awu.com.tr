@@ -1,5 +1,6 @@
 {% extends 'origin/base.html' %}
-{% from 'posts/_macros.html' import post_listed, post_sidebar %}
+{% from 'posts/_macros.html' import post_listed %}
+{% from 'origin/_macros.html' import pagination %}
 
 {% set header_class='header_in shadow element_to_stick clearfix' %}
 {% set header__container_class='container' %}
@@ -19,23 +20,13 @@
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="row">
-						{{  post_listed() }}
-						{{  post_listed() }}
-						{{  post_listed() }}
-						{{  post_listed() }}
-						{{  post_listed() }}						
+						{% for object in object_list %}						
+							{{ post_listed(object) }}
+						{% endfor %}
 					</div>
 					<!-- /row -->
 
-					<div class="pagination_fg">
-					  <a href="#">&laquo;</a>
-					  <a href="#" class="active">1</a>
-					  <a href="#">2</a>
-					  <a href="#">3</a>
-					  <a href="#">4</a>
-					  <a href="#">5</a>
-					  <a href="#">&raquo;</a>
-					</div>
+					{{ pagination(page_obj) }}
 
 				</div>
 				{% include 'posts/sidebar.html' %}

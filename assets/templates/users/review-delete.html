@@ -1,0 +1,12 @@
+{% extends 'origin/confirm.html' %}
+
+{% set 
+	text= 
+		'"' +
+		object.destination.first_name 
+		+' '+ 
+		object.destination.last_name + 
+		'" adlı avukata yazdığınız yorumu silmek istiyormusunuz ?' 
+%}
+
+{% set no_link=url('users:profile-detail',args=[object.destination.id]) %}

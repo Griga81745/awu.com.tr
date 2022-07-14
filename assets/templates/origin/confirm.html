@@ -1,0 +1,79 @@
+{# 
+    To extend for confirmation purposes
+
+    * heading
+    * text
+    * yes_link
+    * yes_text
+    * no_link
+    * no_text
+ #}
+
+{% extends 'origin/base.html' %}
+
+{% set header_class='header_in shadow clearfix' %}
+{% set header__container_class='container' %}
+
+{% block title %}
+	OK
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ static('css/booking-sign_up.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<main class="bg_gray pattern">
+        <div class="container margin_60_40">
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <form method="post" class="box_booking_2">
+                        {{ csrf_input }}
+                        {{ form }}
+                        <div class="main">
+                            <div>
+                                {% if heading %}
+                                    <h3>
+                                        {{ heading }}
+                                    </h3>
+                                {% endif %}
+                                {% if text %}
+                                    <p>
+                                        {{ text }}
+                                    </p>
+                                {% endif %}
+                                <div style="display:flex;gap: 1em">
+                                    <button type="submit" class="btn_1 full-width" style="background: black;">
+                                        {% if yes_text %}
+                                            {{ yes_text }}
+                                        {% else %}
+                                            Onayla
+                                        {% endif %}
+                                    </button>
+                                    <a href="{{ no_link }}" class="btn_1 full-width">
+                                        {% if no_text %}
+                                            {{ no_text }}
+                                        {% else %}
+                                            Iptal Et
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /box_booking -->
+                </div>
+                <!-- /col -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </main>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ static('js/sticky_sidebar.min.js')}}"></script>
+    <script src="{{ static('js/specific_detail.js')}}"></script>
+    <script src="{{ static('js/datepicker.min.js')}}"></script>
+    <script src="{{ static('js/datepicker_func_1.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% macro pagination(page_obj) -%}
+
+    <span class="text-center d-block">
+        {{ page_obj.number }}'dan {{ page_obj.paginator.num_pages }}
+    </span>
+    <div class="pagination_fg">
+
+
+        {% if page_obj.has_previous() %}
+            {% if page_obj.previous_page_number() != 1 %}
+                <a href="?page=1">&laquo; Başa Dön</a>
+            {% endif %}
+            <a href="?page={{ page_obj.previous_page_number() }}">{{ page_obj.previous_page_number() }}</a>
+        {% endif %}
+
+        <a href="#" class="active">{{ page_obj.number }}</a>
+
+        {% if page_obj.has_next() %}
+            <a href="?page={{ page_obj.next_page_number() }}">{{ page_obj.next_page_number() }}</a>
+            {% if page_obj.paginator.num_pages != page_obj.next_page_number() %}
+                <a href="?page={{ page_obj.paginator.num_pages }}">Sona Git &raquo;</a>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+{%- endmacro %}
+
+{% macro alert(type,message) -%}
+    <div class="alert {{type}}">
+        {% if type=='success' %}
+            <i class="fa-solid fa-square-check"></i>
+        {% elif type=='error' %}
+            <i class="fa-solid fa-circle-exclamation"></i>
+        {% endif %}
+        &nbsp;
+        {{message}}
+    </div>
+{%- endmacro %}

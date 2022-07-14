@@ -102,3 +102,18 @@
 .custom-chat-window--message{
 
 }
+
+.alert{
+	color: #fff;
+	padding: 1em;
+	border-radius: 0.5em;
+	margin-bottom: 1em;
+}
+
+.alert.success{
+	background: #0dcaf0;
+}
+
+.alert.error{
+	background: #dc3545;
+}

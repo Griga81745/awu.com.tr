@@ -1,20 +1,27 @@
-{% macro post_listed() -%}
+{% macro post_listed(object) -%}
     <div class="col-md-6">
         <article class="blog">
             <figure>
-                <a href="{{ url('blog:post') }}"><img src="{{ static('img/blog-1.jpg') }}" alt="">
+                <a href="{{ object.get_absolute_url() }}"><img src="{{ object.image.url }}" alt="">
                     <div class="preview"><span>Daha Fazla Oku</span></div>
                 </a>
             </figure>
             <div class="post_info">
-                <small><i class="fas fa-calendar"></i> 20.01.2017</small>
-                <h2><a href="{{ url('blog:post') }}">Ea exerci option hendrerit</a></h2>
-                <p>Quodsi sanctus pro eu, ne audire scripserit quo. Vel an enim offendit salutandi, in eos quod omnes epicurei, ex veri qualisque scriptorem mei.</p>
+                <small><i class="fas fa-calendar"></i> {{ object.creation_date.date() }}</small>&nbsp;
+                <small><i class="fas fa-tag"></i>
+                    {% for index,tag in enumerate(object.tags.all()[:5]) %}
+                        {{ tag.name }} 
+                        {{ ',' if index+1 != object.tags.count()}}
+                    {% endfor %}
+                    {{ '...' if object.tags.all() }}
+                </small>
+                <h2><a href="{{ object.get_absolute_url() }}">{{ object.title }}</a></h2>
+                <p>{{ object.content[:50] }}...</p>
                 <ul>
                     <li>
                         <div class="thumb"><img src="{{ static('img/avatar.jpg') }}" alt=""></div> Admin
                     </li>
-                    <li><i class="icon_comment_alt"></i>20</li>
+                    <li><i class="icon_comment_alt"></i>{{ object.comments.count() }}</li>
                 </ul>
             </div>
         </article>
@@ -22,12 +29,29 @@
     </div>
 {%- endmacro %}
 
-{% macro post_sidebar() -%}
+{% macro post_sidebar(object) -%}
     <li>
         <div class="alignleft">
-            <a href="{{ url('blog:post') }}"><img src="{{ static('img/blog-5.jpg') }}" alt=""></a>
+            <a href="{{ object.get_absolute_url() }}"><img src="{{ object.image.url }}" alt=""></a>
         </div>
-        <small>Category - 11.08.2016</small>
-        <h3><a href="{{ url('blog:post') }}" title="">Verear qualisque ex minimum...</a></h3>
+        <small>{{ object.creation_date.date() }}</small>
+        <h3><a href="{{ object.get_absolute_url() }}" title="">{{ object.title }}</a></h3>
+    </li>
+{% endmacro -%}
+
+{%- macro comment(comment) %}
+    <li>
+        <div class="avatar">
+            <a href="#"><img src="{{ static('img/avatar1.jpg') }}" alt="">
+            </a>
+        </div>
+        <div class="comment_right clearfix">
+            <div class="comment_info">
+                <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a><span>|</span>{{ comment.creation_date.date() }}<span></span>
+            </div>
+            <p>
+                {{ comment.content }}
+            </p>
+        </div>
     </li>
 {% endmacro -%}

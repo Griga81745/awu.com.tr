@@ -11,6 +11,7 @@ DEBUG = int(env('DEBUG'))
 INSTALLED_APPS = [
   'channels',
   'rest_framework',
+  'taggit',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -44,7 +45,10 @@ TEMPLATES = [
     "DIRS": [BASE_DIR / 'assets/templates'],
     "APP_DIRS": True,
     "OPTIONS": {
-      "environment": "settings.jinja2.environment"
+      "environment": "settings.jinja2.environment",
+      "context_processors": [
+        "django.contrib.messages.context_processors.messages",
+      ],
     }
   },
   {
@@ -84,7 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
   }
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tr'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True

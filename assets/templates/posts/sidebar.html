@@ -1,3 +1,4 @@
+{% from 'posts/_macros.html' import post_sidebar %}
 <aside class="col-lg-3">
     <div class="widget search_blog">
         <div class="form-group">
@@ -11,10 +12,9 @@
             <h4>Son Haberler</h4>
         </div>
         <ul class="comments-list">
-            {{ post_sidebar() }}
-            {{ post_sidebar() }}
-            {{ post_sidebar() }}
-            {{ post_sidebar() }}
+            {% for post in last_posts() %}
+                {{ post_sidebar(post) }}
+            {% endfor %}
         </ul>
     </div>
     <!-- /widget -->
@@ -23,13 +23,9 @@
             <h4>Popüler Tagler</h4>
         </div>
         <div class="tags">
-            <a href="#">Lawyer</a>
-            <a href="#">Accounting</a>
-            <a href="#">Consulting</a>
-            <a href="#">Doctors</a>
-            <a href="#">Best Offers</a>
-            <a href="#">Languages</a>
-            <a href="#">Teach</a>
+            {% for tag in get_most_used_tags() %}
+                <a href="#">{{ tag.name }}</a>
+            {% endfor %}
         </div>
     </div>
     <!-- /widget -->
