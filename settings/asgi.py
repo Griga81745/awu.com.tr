@@ -9,7 +9,7 @@ from channels.security.websocket import AllowedHostsOriginValidator
 
 from apps.messenger.routing import websocket_urlpatterns as messenger
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.settings.production')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.settings')
 application = ProtocolTypeRouter({
   'http': get_asgi_application(),
   'websocket': AllowedHostsOriginValidator(  # Роутер для сокетов из messenger/routing
