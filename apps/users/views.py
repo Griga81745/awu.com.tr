@@ -17,6 +17,9 @@ class ConfirmedView(generic.TemplateView):
   template_name = 'origin/confirmed.html'
 
 class HomeView(generic.TemplateView):
+  extra_context = {
+    'lawyers': User.lawyers.all()[:9]
+  }
   template_name = 'users/home.html'
 
 

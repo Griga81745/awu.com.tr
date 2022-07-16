@@ -58,12 +58,9 @@
                 <p></p>
             </div>
             <div class="row">
-                {{ lawyer_card() }}
-                {{ lawyer_card() }}
-                {{ lawyer_card() }}
-                {{ lawyer_card() }}
-                {{ lawyer_card() }}
-                {{ lawyer_card() }}                
+                {% for lawyer in lawyers %}
+                    {{ lawyer_card(lawyer) }}
+                {% endfor %}
             </div>
             <!-- /row -->
             <p class="text-center"><a href="{{ url('users:search') }}" class="btn_1 medium">Daha Fazla Avukat Bul <!DOCTYPE html>

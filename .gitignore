@@ -120,7 +120,10 @@ todo.txt
 migrations/
 
 assets/static/*
-assets/media/*
-
-!assets/media/.gitkeep
 !assets/static/.gitkeep
+
+assets/media/posts/images/*
+!assets/media/posts/images/default.*
+
+assets/media/users/avatars/*
+!assets/media/users/avatars/default.*

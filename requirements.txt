@@ -1,3 +1,4 @@
+abs==0.0.0
 asgiref==3.5.2
 certifi==2022.6.15
 charset-normalizer==2.1.0
@@ -15,6 +16,7 @@ Jinja2==3.1.2
 Markdown==3.3.7
 MarkupSafe==2.1.1
 msgpack==1.0.4
+names==0.3.0
 oauthlib==3.2.0
 orjson==3.7.3
 Pillow==9.1.1
