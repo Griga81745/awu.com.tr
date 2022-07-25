@@ -13,26 +13,7 @@
 
 {% block content %}
 	<main>
-	    <div class="hero_single inner_pages background-image" style="background-image: url({{ static('img/access_bg.jpg') }})">
-	        <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.7)">
-	            <div class="container">
-	                <div class="row justify-content-center">
-	                    <div class="col-xl-8 col-lg-10 col-md-8">
-	                        <h1>Help and support</h1>
-	                        <p>Search questions or useful articles</p>
-	                        <form>
-	                            <div class="search_bar">
-	                                <input type="text" class="form-control" placeholder="What are you looking for?">
-	                                <input type="submit" value="Search">
-	                            </div>
-	                        </form>
-	                    </div>
-	                </div>
-	                <!-- /row -->
-	            </div>
-	        </div>
-	    </div>
-	    <!-- /hero_single -->
+	   {% include('we/component/search-bar.html') %}
 	    <div class="bg_gray">
 	        <div class="container margin_60_40">
 	            <div class="main_title center">

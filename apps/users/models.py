@@ -95,6 +95,10 @@ class Review(models.Model):
 
   creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
+  class Meta:
+    verbose_name = 'Eleştiri'
+    verbose_name_plural = 'Eleştirilerr'
+
   def save(self, *args: Tuple, **kwargs: Dict) -> None:
 
     if self.__class__.objects.filter(owner=self.owner,destination=self.destination) and not self.__class__.objects.filter(id=self.id):

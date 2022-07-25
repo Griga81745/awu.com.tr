@@ -1,0 +1,22 @@
+{% macro faq(id,title,content) -%}
+
+  <li>
+    <a
+      class="btn btn-primary"
+      data-toggle="collapse"
+      href="#collapseExample{{id}}"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      <i class="icon_documents_alt"></i>
+      {{ title }}
+    </a>
+    <div class="collapse" id="collapseExample{{id}}">
+      <div class="card card-body">
+        {{ content }}
+      </div>
+    </div>
+  </li>
+
+{%- endmacro %}

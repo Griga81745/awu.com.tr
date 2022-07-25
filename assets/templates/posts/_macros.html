@@ -42,7 +42,7 @@
 {%- macro comment(comment) %}
     <li>
         <div class="avatar">
-            <a href="#"><img src="{{ static('img/avatar1.jpg') }}" alt="">
+            <a href="#"><img style="height:100%; width:100%; object-fit:cover" src="{{ comment.user.avatar.url }}" alt="">
             </a>
         </div>
         <div class="comment_right clearfix">

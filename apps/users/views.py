@@ -3,13 +3,12 @@ from . import models, forms, mixins as custom_mixins
 
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse, reverse_lazy
-
 
 User = get_user_model()
 
@@ -122,7 +121,7 @@ class RegisterView(custom_mixins.AlreadyLoggedInMixin, generic.View):
     else:
       return render(request, self.template_name, {'form': form})
 
-    return HttpResponse('Success')
+    return redirect('users:home')
 
 
 class LoginView(custom_mixins.AlreadyLoggedInMixin, generic.View):
@@ -153,4 +152,9 @@ class LoginView(custom_mixins.AlreadyLoggedInMixin, generic.View):
     else:
       return render(request, self.template_name, {'form': form})
 
-    return HttpResponse('Success')
+    return redirect('users:home')
+
+
+def logout_view(request):
+	logout(request)
+	return redirect(to='users:home')

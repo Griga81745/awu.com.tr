@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-9 col-lg-10">
-                        <h1>Avukat Ara Ve Bul</h1>
-                        <p>Avukatlarımızla Mesaj İle İletişime Geçerek Randevu Alın</p>
+                        <h1>En İyi Avukatı Bul !</h1>
+                        <p>Binlerce avukat arasında seçim yap</p>
                         <form action="{{ url('users:search') }}">
                             <div class="row no-gutters custom-search-input">
                                 <div class="col-md-9">
@@ -36,10 +36,9 @@
                             <div class="search_trends">
                                 <h5>Şuanda Popüler:</h5>
                                 <ul>
-                                    <li><a href="#0">doctor</a></li>
-                                    <li><a href="#0">lawyer</a></li>
-                                    <li><a href="#0">teacher</a></li>
-                                    <li><a href="#0">psychologist</a></li>
+                                    {% for tag in get_most_used_tags()[:5] %}
+                                        <li><a href="#0">{{tag.name}}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </form>

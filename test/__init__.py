@@ -31,7 +31,7 @@ from .posts import PostsTestModule
 class SuperTestModule(TestModule):
 
     modules = (
-        TagsTestModule(),
+        # TagsTestModule(),
         UsersTestModule(),
         PostsTestModule() 
     )

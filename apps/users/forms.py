@@ -9,11 +9,11 @@ User = get_user_model()
 
 
 class RegisterForm(custom_mixins.AddClassNameMixin, forms.Form):
-  first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name'}))
-  last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-  password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'id': 'password1'}))
-  password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'id': 'password2'}))
+  first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Adınız'}))
+  last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Soyadınız'}))
+  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'E-Posta'}))
+  password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Parola', 'id': 'password1'}))
+  password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Parola Onayla', 'id': 'password2'}))
 
   def clean(self) -> Dict:
     cleaned_data = super().clean()
@@ -33,6 +33,6 @@ class RegisterForm(custom_mixins.AddClassNameMixin, forms.Form):
 
 
 class LoginForm(custom_mixins.AddClassNameMixin, forms.Form):
-  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email', 'id': 'email'}))
-  password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'id': 'password'}))
+  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'E-Posta', 'id': 'email'}))
+  password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Parola', 'id': 'password'}))
   remember_me = forms.BooleanField(widget=forms.CheckboxInput(), required=False)

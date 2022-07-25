@@ -78,22 +78,30 @@
 	                                </div>
 	                                <div id="collapse-B" class="collapse" role="tabpanel" aria-labelledby="heading-B">
 	                                    <div class="card-body reviews">
-	                                        <div id="reviews">
-	                                        	{% set reviews=object.destination_reviews.all() %}
-	                                        	{% if reviews %}
-													{% for review_ in reviews %}
-														{{ review(review_) }}
-													{% endfor %}
-												{% else %}
-													<h3 style="color: rgba(0,0,0,0.5); margin-bottom: 1em; text-align: center;">
-														<i class="fas fa-poo"></i>
-														&nbsp;
-														Bu kullanıcı henüz yorum almadı...
-													</h3>
-												{% endif %}
-	                                        </div>
-	                                        <!-- /reviews -->
-	                                        <p class="text-right"><a href="{{ url('users:review-create',args=[object.id]) }}" class="btn_1">Yorum Bırak</a></p>
+											{% if request.user.is_authenticated %}
+												<div id="reviews">
+													{% set reviews=object.destination_reviews.all() %}
+													{% if reviews %}
+														{% for review_ in reviews %}
+															{{ review(review_) }}
+														{% endfor %}
+													{% else %}
+														<h3 style="color: rgba(0,0,0,0.5); margin-bottom: 1em; text-align: center;">
+															<i class="fas fa-poo"></i>
+															&nbsp;
+															Bu kullanıcı henüz yorum almadı...
+														</h3>
+													{% endif %}
+												</div>
+												<p class="text-right"><a href="{{ url('users:review-create',args=[object.id]) }}" class="btn_1">Yorum Bırak</a></p>
+											{% else %}
+												<h4 style="color: rgba(0,0,0,0.5); margin-bottom: 1em; text-align: center;">
+													Avukat eleştirisi yapabilmek için 
+													<a href="{{ url('users:login') }}">
+														giriş yapın...
+													</a>
+												</h4>
+											{% endif %}
 	                                    </div>
 	                                </div>
 	                            </div>

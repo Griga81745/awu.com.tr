@@ -11,6 +11,10 @@ class Chat(models.Model):
     verbose_name='Chats'
   )
 
+  class Meta:
+    verbose_name = 'Sohbet'
+    verbose_name_plural = 'Sohbetler'
+
   def last_message(self) -> models.Model:
     return self.messages.last()
 
@@ -37,6 +41,10 @@ class Message(models.Model):
   )
 
   text = models.CharField('Text', max_length=1000)
+
+  class Meta:
+    verbose_name = 'Mesaj'
+    verbose_name_plural = 'Mesajlar'
 
   def __str__(self) -> str:
     return self.text

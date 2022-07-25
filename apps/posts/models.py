@@ -26,6 +26,10 @@ class Post(models.Model):
   published_posts = PublishedManager()
   tags = TaggableManager()
 
+  class Meta:
+    verbose_name = 'Haber'
+    verbose_name_plural = 'Haberler'
+
   def get_absolute_url(self):
     return reverse('blog:post-detail',
       args= [ self.slug ]
@@ -53,6 +57,12 @@ class Comment(models.Model):
 
   content = models.TextField('Content')
   creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
+
+  MAX_LENGTH = 200
+
+  class Meta:
+    verbose_name = 'Yorum'
+    verbose_name_plural = 'Yorumlar'
 
   def __str__(self) -> str:
     return f'{self.user} - {self.post}'

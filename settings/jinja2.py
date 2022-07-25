@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.templatetags.static import static
 
 from apps.posts.models import Post
+from apps.we.models import Media
 
 def last_posts(count=5):
 	return Post.published_posts.all()[:count]
@@ -14,6 +15,8 @@ def most_used_tags(count=0):
 	else:
 		return Post.tags.most_common()
 
+def get_media():
+	return Media.objects.all()
 
 def environment(**options):
 	env = Environment(**options)
@@ -23,6 +26,7 @@ def environment(**options):
 		"last_posts": last_posts,
 		"enumerate": enumerate,
 		"dir": dir,
-		"get_most_used_tags": most_used_tags
+		"get_most_used_tags": most_used_tags,
+		"get_media": get_media
 	})
 	return env

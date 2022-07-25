@@ -4,6 +4,7 @@
         <figure>
             <a href="{{ object.get_absolute_url() }}" class="wish_bt"><i class="icon_heart"></i></a>
             <img 
+                style="height: 100%;width: 100%;object-fit: cover;"
                 src="{{ static('img/lazy-placeholder.png') }}" 
                 data-src="{{ object.avatar.url }}" 
                 class="img-fluid lazy" 

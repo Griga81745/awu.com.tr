@@ -27,6 +27,12 @@
 		{
 			"path": "../assets/templates"
 		},
+		{
+			"path": "../default"
+		},
+		{
+			"path": "../test"
+		}
 	],
 	"settings": {
 		"files.exclude":{

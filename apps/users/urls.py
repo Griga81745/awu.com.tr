@@ -16,5 +16,6 @@ urlpatterns = [
   path('update-review/<int:pk>', views.ReviewUpdateView.as_view(), name='review-update'),
   path('account/', views.ProfileEditView.as_view(), name='profile-edit'),
   path('register/', views.RegisterView.as_view(), name='register'),
-  path('login/', views.LoginView.as_view(), name='login')
+  path('login/', views.LoginView.as_view(), name='login'),
+  path('logout/', views.logout_view, name='logout')
 ]

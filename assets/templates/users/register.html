@@ -10,14 +10,14 @@
   <div id="login">
     <aside>
       <figure>
-        <a href="index-2.html"><img src="{{ static('img/logo_sticky.svg') }}" width="120" height="35" alt=""
+        <a href="{{ url('users:home') }}"><img src="{{ static('img/logo.svg') }}" width="120" height="35" alt=""
             class="logo_sticky"></a>
       </figure>
       <div class="access_social">
-        <a href="#" class="social_bt facebook">Register with Facebook</a>
-        <a href="#" class="social_bt google">Register with Google</a>
+        <a href="#" class="social_bt facebook">Facebook ile giriş yap</a>
+        <a href="#" class="social_bt google">Google ile giriş yap</a>
       </div>
-      <div class="divider"><span>Or</span></div>
+      <div class="divider"><span>veya</span></div>
       <form action="{{ url ('users:register') }}" method="POST" autocomplete="off">
         <br>
         {{ csrf_input }}
@@ -52,10 +52,10 @@
           <i class="icon_lock_alt"></i>
         </div>
         <div id="pass-info" class="clearfix"></div>
-        <button type="submit" class="btn_1 rounded full-width">Register Now!</button>
-        <div class="text-center add_top_10">Already have an acccount? <strong><a href="{{ url('users:login') }}">Login!</a></strong>
+        <button type="submit" class="btn_1 rounded full-width">Hesap oluştur!</button>
+        <div class="text-center add_top_10"><strong><a href="{{ url('users:login') }}">Benim hesabım var</a></strong>
       </form>
-      <div class="copy">© 2020 Prozim</div>
+      <div class="copy">© avvu.com.tr</div>
     </aside>
   </div>
 {% endblock %}x
