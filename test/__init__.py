@@ -24,14 +24,13 @@ class TestModule(ABC):
         pass
 
 
-from .users import UsersTestModule, TagsTestModule
+from .users import UsersTestModule
 from .posts import PostsTestModule
 
 
 class SuperTestModule(TestModule):
 
     modules = (
-        # TagsTestModule(),
         UsersTestModule(),
         PostsTestModule() 
     )
@@ -47,3 +46,4 @@ class SuperTestModule(TestModule):
 
 
 module = SuperTestModule()
+create = module.create

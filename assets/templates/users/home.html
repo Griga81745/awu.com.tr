@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 {% for lawyer in lawyers %}
-                    {{ lawyer_card(lawyer) }}
+                    {{ lawyer_card(lawyer,request.user) }}
                 {% endfor %}
             </div>
             <!-- /row -->

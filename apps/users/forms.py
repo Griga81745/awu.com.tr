@@ -5,6 +5,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
+from apps.users.models import Area
+
 User = get_user_model()
 
 
@@ -36,3 +38,51 @@ class LoginForm(custom_mixins.AddClassNameMixin, forms.Form):
   email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'E-Posta', 'id': 'email'}))
   password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Parola', 'id': 'password'}))
   remember_me = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+
+class UpdateUserForm(
+  custom_mixins.AddClassNameMixin,
+  custom_mixins.AddAttributesMixin,
+  forms.ModelForm
+):
+  class_name = 'custom-input'
+  class Meta:
+    model = User
+    fields = [
+      'first_name',
+      'last_name',
+      'email',
+      # 'phone_number',
+      # 'whatsapp'
+    ]
+ 
+class UpdateLawyerForm(
+  custom_mixins.AddClassNameMixin,
+  custom_mixins.AddAttributesMixin,
+  forms.ModelForm
+):
+  class_name = 'custom-input'
+  custom_attributes = {
+    'areas': {
+      'id':'slim-select'
+    }
+  }
+
+  class Meta:
+    model = User
+    fields = [
+      'first_name',
+      'last_name',
+      'email',
+      # 'phone_number',
+      # 'whatsapp',
+      'consultacy_price',
+      'city', 
+      'website',
+      'areas',
+      'consultacy_free',
+      'bio',
+      'avatar',
+    ]
+  
+
+

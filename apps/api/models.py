@@ -14,7 +14,7 @@ class Ticket(models.Model):
     unique=True
   )
 
-  ticket = models.CharField('Ticket', max_length=32, unique=True, validators=[MinLengthValidator(32)])
+  ticket = models.CharField('ticket', max_length=32, unique=True, validators=[MinLengthValidator(32)])
 
   def __str__(self) -> str:
     return str(self.user)

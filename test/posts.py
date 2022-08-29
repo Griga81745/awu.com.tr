@@ -4,8 +4,8 @@ from django.utils.lorem_ipsum import paragraph
 
 from . import TestModule
 from apps.posts.models import Post
+from apps.users.models import Area
 from random import choice
-from taggit.models import Tag
 
 class PostsTestModule(TestModule):
 
@@ -22,7 +22,7 @@ class PostsTestModule(TestModule):
             )
             object.save()
             for i in range(3):
-                object.tags.add(choice(list(Tag.objects.all())))
+                object.tags.add(choice(list(Area.objects.all())))
             objects.append(object)
         return objects
 

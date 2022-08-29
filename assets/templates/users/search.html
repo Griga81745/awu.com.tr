@@ -2,8 +2,8 @@
 {% from 'users/_macros.html' import lawyer_card  %}
 {% from 'origin/_macros.html' import pagination %}
 
-{% set header_class='header_in clearfix' %}
-{% set header__container_class='container' %}
+{% set header_class="header_in clearfix" %}
+{% set header__container_class="container" %}
 
 {% block title %}
     Avukat Ara bul
@@ -23,155 +23,34 @@
             </div>
             <div class="row">
                 <aside class="col-lg-3" id="sidebar_fixed">
-                    <div class="filter_col">
-                        <input type="text" class="form-control" placeholder="Anahtar Kelimeler...">
-                    </div>
-                    <div class="filter_col">
-                        <div class="inner_bt"><a href="#" class="open_filters"><i class="icon_close"></i></a></div>
-                        <div class="filter_type">
-                            <h4><a href="#filter_1" data-toggle="collapse" class="opened">Alanlar</a></h4>
-                            <div class="collapse show" id="filter_1">
-                                <ul>
-                                    <li>
-                                        <label class="container_check">Psychologist<small>12</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Dermatologist <small>24</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Cardiologist <small>23</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">General Medicine <small>11</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Gynecologist <small>18</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Autoimmune Deseas <small>12</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Pediatrician <small>15</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
+                    <form class="filter_col">
+                        <h3>Filtreler</h3>
+                        <hr>
+                        
+                        {% for field in filter.form %}	
+                            <div style="margin-bottom:1em">
+                                {% if field.name == 'avatar' %}
+                                    {{ field.field.widget.attrs.update({'onchange':'pic.src=window.URL.createObjectURL(this.files[0])'}) }}
+                                {% endif %}
+                                {{ field.label }}:
+                                {{ field }}
                             </div>
-                            <!-- /filter_type -->
-                        </div>
-                        <!-- /filter_type -->
-                        <div class="filter_type">
-                            <h4><a href="#filter_2" data-toggle="collapse" class="closed">Rating</a></h4>
-                            <div class="collapse" id="filter_2">
-                                <ul>
-                                    <li>
-                                        <label class="container_check">Superb 9+ <small>06</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Very Good 8+ <small>12</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Good 7+ <small>17</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">Pleasant 6+ <small>43</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /filter_type -->
-                        <div class="filter_type">
-                            <h4><a href="#filter_3" data-toggle="collapse" class="closed">Distance</a></h4>
-                            <div class="collapse" id="filter_3">
-                                <div class="range_input">Radius around destination <span></span> km</div>
-                                <div class="add_bottom_15"><input type="range" min="10" max="100" step="10" value="30" data-orientation="horizontal"></div>
-                            </div>
-                        </div>
-                        <!-- /filter_type -->
-                        <div class="filter_type">
-                            <h4><a href="#filter_4" data-toggle="collapse" class="closed">Price</a></h4>
-                            <div class="collapse" id="filter_4">
-                                <ul>
-                                    <li>
-                                        <label class="container_check">$0 — $50<small>11</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">$50 — $100<small>08</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">$100 — $150<small>05</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="container_check">$150 — $200<small>18</small>
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="container_check">Bedava Görüşme
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <!-- /filter_type -->
+                        {% endfor %}
                         <div class="buttons">
                             <div class="d-flex" style="gap:5px">
-                                <a href="#0" class="btn_1 full-width">Filter</a>
-                                <a href="#0" class="btn_1 full-width" style="background: black;">Filtre Kaldir</a>                                    
+                                <button type="submit" class="btn_1 full-width">Filtrele</button>
+                                <a href="." class="btn_1 full-width" style="background: black;">Sıfırla</a>                                    
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </aside>
                 <div class="col-lg-9">
                     <div class="row grid_sidebar">
                         {% for object in object_list %}
-                            {{ lawyer_card(object) }}
+                            {{ lawyer_card(object,request.user) }}
                         {% endfor %}
                     </div>
-                    {{ pagination(page_obj) }}
+                    {{ pagination(page_obj,filter_params) }}
                 </div>
                 <!-- /col -->
             </div>

@@ -1,0 +1,72 @@
+{% extends 'origin/base.html' %}
+{% from 'users/_macros.html' import lawyer_card  %}
+{% from 'origin/_macros.html' import pagination %}
+
+{% set header_class='header_in clearfix' %}
+{% set header__container_class='container' %}
+
+{% block title %}
+    Avukat Ara bul
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ static('css/listing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main class="bg_color">
+       
+        <!-- /filters_full -->
+        <div class="container margin_30_40">
+            <div class="page_header">
+                <h1>{{ request.user.favorites.count() }}/{{ request.user.LIMIT_FAVORITES }}</h1><span> favori.</span>
+            </div>
+            <div class="row">
+                <aside class="col-lg-3" id="sidebar_fixed">
+                    <div class="filter_col">
+                        <input type="text" class="form-control" placeholder="Anahtar Kelimeler...">
+                    </div>
+                    <div class="filter_col">
+                        <p>Kalp buttonlarına basarak avukatları buraya kaydedebilirsiniz (en fazla {{ request.user.LIMIT_FAVORITES }}).</p>
+                        <div class="buttons">
+                            <a href="{{ url('users:search') }}" class="btn_1 full-width" style="background: black;">Avukatları Keşfet</a>                                    
+                        </div>
+                    </div>
+                </aside>
+                <div class="col-lg-9">
+                    {% if object_list %}
+                        <div class="row grid_sidebar">
+                            {% for object in object_list %}
+                                {{ lawyer_card(object,request.user) }}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <h2>
+                            <i class="fa-solid fa-face-meh-blank"></i>
+                            Favori sayfanız boş
+                        </h2>
+                        <p>Avukatınız bulmak için <a href="{{ url('users:search') }}">tıklayınız</a></p>
+                    {% endif %}
+                </div>
+                <!-- /col -->
+            </div>
+        </div>
+        <!-- /container -->
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ static('js/sticky_sidebar.min.js') }}"></script>
+    <script src="{{ static('js/specific_listing.min.js') }}"></script>
+    <script src="{{ static('js/isotope.min.js') }}"></script>
+    <script>
+    $(window).on("load", function() {
+        var $container = $('.isotope-wrapper');
+        $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+    });
+    $('.switch-field').on('click', 'input', 'change', function() {
+        var selector = $(this).attr('data-filter');
+        $('.isotope-wrapper').isotope({ filter: selector });
+    });
+    </script>
+{% endblock %}

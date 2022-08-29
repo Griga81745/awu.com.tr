@@ -1,8 +1,10 @@
 from jinja2 import Environment
+from django.db.models import Count
 from django.middleware.csrf import get_token
 from django.urls import reverse
 from django.templatetags.static import static
 
+from apps.users.models import User, Area
 from apps.posts.models import Post
 from apps.we.models import Media
 
@@ -11,9 +13,9 @@ def last_posts(count=5):
 
 def most_used_tags(count=0):
 	if count:
-		return Post.tags.most_common()[:count]
+		return Area.objects.annotate(nused=Count('user')).order_by('-nused')[:count]
 	else:
-		return Post.tags.most_common()
+		return Area.objects.annotate(nused=Count('user')).order_by('-nused')[:10]
 
 def get_media():
 	return Media.objects.all()

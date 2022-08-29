@@ -1,4 +1,4 @@
-from taggit.models import Tag
+from apps.users.models import Area
 
 TAGS = (
     'boşanma',
@@ -29,9 +29,9 @@ TAGS = (
 def create():
     tags = list()
     for area in TAGS:
-        tag = Tag(
+        object = Area(
             name = area.title()
         )
-        tag.save()
-        tags.append(tag)
+        object.save()
+        tags.append(object)
     return tags

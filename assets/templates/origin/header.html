@@ -21,10 +21,10 @@
                                 <ul>
                                     <li><a href="{{ url('users:profile-edit') }}"><i class="icon_cog"></i>Profilim</a></li>
                                     <li>
-                                        <a href="#0">
+                                        <a href="{{ url('users:favorites') }}">
                                             <i class="fa-solid fa-heart"></i>
                                             Favorilerim
-                                            <sup style="background: lime; color: black; border-radius: 100px; padding: 0 2px">10</sup>
+                                            <sup style="background: lime; color: black; border-radius: 100px; padding: 0 2px">{{ request.user.favorites.count() }}</sup>
                                         </a>
                                     </li>
                                     <li>
@@ -72,10 +72,10 @@
                 <li class="submenu">
                     <a href="#" class="show-submenu">Alanlar</a>
                     <ul>
-                        {% for tag in get_most_used_tags()[:5] %}
+                        {% for tag in get_most_used_tags()[:10] %}
                             <li><a href="#">{{ tag.name }}</a></li>
                         {% endfor %}
-                        <li><a href="#" style="opacity:0.5">Hepsini Gör...</a></li>
+                        <li><a href="{{ url('users:links') }}" style="opacity:0.5">Hepsini Gör...</a></li>
                     </ul>
                 </li>
                 <li class="submenu">

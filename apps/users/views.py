@@ -1,19 +1,24 @@
 from tokenize import Number
-from . import models, forms, mixins as custom_mixins
+import django_filters
+from django_filters.views import FilterView
 
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse, reverse_lazy
 
+from . import models, forms, mixins as custom_mixins
+
 User = get_user_model()
 
 class ConfirmedView(generic.TemplateView):
   template_name = 'origin/confirmed.html'
+
 
 class HomeView(generic.TemplateView):
   extra_context = {
@@ -22,12 +27,64 @@ class HomeView(generic.TemplateView):
   template_name = 'users/home.html'
 
 
-class SearchView(generic.ListView):
+class LinksView(generic.TemplateView):
+  extra_context = {
+    'cities': [],
+    'areas' : models.Area.objects.all()
+  }
+  template_name = 'users/links.html'
+
+
+class SearchView(FilterView):
   model = models.User
   paginate_by = 9
   queryset = models.User.lawyers.all()
+  filterset_fields = [
+    'areas',
+    'consultacy_free',  
+    'city'
+  ]
   template_name = 'users/search.html'
 
+  def get_context_data(self,*args,**kwargs):
+    context = super().get_context_data(*args,**kwargs)
+    context.update({'filter_params':self.filter_params})
+    return context
+
+  def get_filterset(self,filterset_class):
+    kwargs = self.get_filterset_kwargs(filterset_class)
+
+    class ModifiedFilterSet(
+      custom_mixins.AddAttributesMixin,
+      custom_mixins.AddClassNameMixin,
+      filterset_class
+    ):
+      rate__gte = django_filters.NumberFilter(label='En az değerlendirme',field_name='rate', lookup_expr='gte')
+      consultacy_price__gte = django_filters.NumberFilter(label='En az danışma fiyatı',field_name='consultacy_price', lookup_expr='gte')
+      consultacy_price__lte = django_filters.NumberFilter(label='En fazla danışma fiyatı',field_name='consultacy_price', lookup_expr='lte')
+      custom_attributes = {
+        'areas': {
+          'id':'slim-select'
+        },
+        'consultacy_price':{
+          'min': 0
+        }
+      } 
+      not_modify_fields = [
+        'areas'
+      ]
+      
+
+    return ModifiedFilterSet(**kwargs)
+
+  @property
+  def filter_params(self):
+    # print(dir(self.request.GET))
+    params = self.request.GET
+    print(list(params.lists()))
+    # print([ (i,params[i]) for i in params])
+    # print([item for item in self.request.GET.items()])
+    return '&'.join([ f'{item[0]}={item[1]}' for item in filter(lambda item: item[0]!='page',self.request.GET.items()) ])
 
 class ProfileDetailView(generic.DetailView):
   model = models.User
@@ -43,11 +100,11 @@ class PasswordResetView(generic.TemplateView):
   template_name = 'users/password-reset.html'
 
 
-class AppointmentCreateView(generic.TemplateView):
+class AppointmentCreateView(LoginRequiredMixin, generic.TemplateView):
   template_name = 'users/appointment-create.html'
 
 
-class ReviewCreateView(custom_mixins.ReviewFormMixin, generic.CreateView):
+class ReviewCreateView(LoginRequiredMixin, custom_mixins.ReviewFormMixin, generic.CreateView):
   model = models.Review
   fields = ('content', 'rate')
   extra_context = {'view_type':'create', 'model': models.Review}
@@ -67,7 +124,8 @@ class ReviewCreateView(custom_mixins.ReviewFormMixin, generic.CreateView):
       messages.error(self.request,e.message)
     return HttpResponseRedirect(self.get_success_url())
 
-class ReviewUpdateView(custom_mixins.ReviewFormMixin, generic.UpdateView):
+
+class ReviewUpdateView(LoginRequiredMixin,custom_mixins.ReviewFormMixin, generic.UpdateView):
   model = models.Review
   fields = ('rate','content')
   extra_context = {'view_type':'update', 'model': models.Review}
@@ -78,7 +136,7 @@ class ReviewUpdateView(custom_mixins.ReviewFormMixin, generic.UpdateView):
     return reverse_lazy('users:profile-detail',args=[self.get_object().destination.id])
 
 
-class ReviewDeleteView(generic.DeleteView):
+class ReviewDeleteView(LoginRequiredMixin, generic.DeleteView):
   model = models.Review 
   template_name = 'users/review-delete.html'
   # success_url = reverse_lazy('users:confirmed')
@@ -87,19 +145,29 @@ class ReviewDeleteView(generic.DeleteView):
     return reverse_lazy('users:profile-detail',args=[self.get_object().id])
 
 
-class ProfileEditView(generic.TemplateView):
+class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
+  model = User
+  # form_class = forms.UpdateLawyerForm
   template_name = 'users/profile-edit.html'
+  success_url = reverse_lazy('users:profile-edit')
+  def get_object(self):
+    return self.request.user
+  def get_form_class(self):
+    return forms.UpdateLawyerForm if self.request.user.is_lawyer else forms.UpdateUserForm 
 
 
-class ProfilePasswordEditView(generic.TemplateView):
-  template_name = 'users/profile-password-edit.html'
+class FavoritesView(LoginRequiredMixin, generic.ListView):
+  model = User
+  template_name = 'users/favorites.html'
 
+  def get_queryset(self, *args, **kwargs):
+    return self.request.user.favorites.all()
 
 
 class RegisterView(custom_mixins.AlreadyLoggedInMixin, generic.View):
   form_class = forms.RegisterForm
   template_name = 'users/register.html'
-  logged_in_regirect_url = None
+  logged_in_regirect_url = reverse_lazy('users:home')
 
   def get(self, request: HttpRequest) -> HttpResponse:
     if (result := super().get(request)):
@@ -127,7 +195,7 @@ class RegisterView(custom_mixins.AlreadyLoggedInMixin, generic.View):
 class LoginView(custom_mixins.AlreadyLoggedInMixin, generic.View):
   form_class = forms.LoginForm
   template_name = 'users/login.html'
-  logged_in_regirect_url = None
+  logged_in_regirect_url = reverse_lazy('users:home')
 
   def get(self, request: HttpRequest) -> HttpResponse:
     if (result := super().get(request)):
@@ -153,8 +221,3 @@ class LoginView(custom_mixins.AlreadyLoggedInMixin, generic.View):
       return render(request, self.template_name, {'form': form})
 
     return redirect('users:home')
-
-
-def logout_view(request):
-	logout(request)
-	return redirect(to='users:home')

@@ -3261,7 +3261,7 @@ ul#top_menu>li a.btn_access.green:hover {
     background-color: #FF3A65
 }
 
-.strip figure a.wish_bt.liked {
+.strip figure a.wish_bt.active {
     color: #fff;
     background-color: #FF3A65;
     opacity: 1;

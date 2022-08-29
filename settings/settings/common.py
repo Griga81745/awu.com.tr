@@ -15,7 +15,7 @@ DEBUG = int(env('DEBUG'))
 INSTALLED_APPS = [
   'channels',
   'rest_framework',
-  'taggit',
+  'django_filters',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -107,3 +107,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 CSRF_TRUSTED_ORIGINS=['https://avvu.com.tr']
+
+LOGIN_REDIRECT_URL = 'users:home'
+		
+LOGOUT_REDIRECT_URL = 'users:home'
+
+LOGIN_URL = 'users:login'
+
+LOGOUT_URL = 'users:logout'

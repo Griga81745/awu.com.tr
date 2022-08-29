@@ -1,0 +1,18 @@
+<script>
+    function toggle_favorite(id,element){
+        fetch(`/api/toggle-favorite/${id}`).then((response)=>{
+            console.log(response.status)
+            switch (response.status){
+                case 201:
+                    element.classList.add('active')
+                case 406:
+                case 204:
+                default:
+                    element.classList.remove('active')
+            }
+        }).catch((error)=>{
+            alert('Sitede sorun oluştu.')
+            // alert(error)
+        })
+    }
+</script>

@@ -2,19 +2,19 @@ from django.db import models
 
 
 class FAQ(models.Model):
-    title = models.CharField('Başlık', max_length=30)
-    content = models.TextField(verbose_name='İçerik')
+    title = models.CharField('başlık', max_length=30)
+    content = models.TextField(verbose_name='içerik')
 
     class Meta:
-        verbose_name = 'Sıkça Sorulan Soru'
-        verbose_name_plural = 'Sıkça Sorulan Sorular'
+        verbose_name = 'sıkça sorulan soru'
+        verbose_name_plural = 'sıkça sorulan sorular'
 
 
 class Media(models.Model):
-    title = models.CharField(verbose_name='Medya Adı',max_length=255)
-    link = models.TextField(verbose_name='Medya Linki')
-    icon_class = models.CharField(verbose_name='Font-Awesome Class',max_length=255)
+    title = models.CharField(verbose_name='medya adı',max_length=255)
+    link = models.TextField(verbose_name='medya linki')
+    icon_class = models.CharField(verbose_name='font-awesome class',max_length=255)
 
     class Meta:
-        verbose_name = 'Medya Hesabı'
-        verbose_name_plural = 'Medya Hesapları'
+        verbose_name = 'medya hesabı'
+        verbose_name_plural = 'medya hesapları'

@@ -21,7 +21,7 @@
                         {% for tag in get_most_used_tags()[:10] %}
                             <li><a href="#">{{ tag.name }}</a></li>
                         {% endfor %}
-                        <li><a href="#" style="opacity:0.5">Bütün Alanlar</a></li>
+                        <li><a href="{{ url('users:links') }}" style="opacity:0.5">Bütün Alanlar</a></li>
                     </ul>
                 </div>
             </div>

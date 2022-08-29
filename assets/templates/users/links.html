@@ -1,0 +1,17 @@
+{% extends 'origin/plain.html' %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <h1>Alanlar</h1>
+        {% for area in areas  %}
+            <a href='{{ area.get_absolute_url() }}'>{{ area.name }}</a>&nbsp;&nbsp;
+        {% endfor %}
+        <br><br><br>
+        <h1>İlçeler</h1>
+        {% for area in areas  %}
+            <a href='{{ area.get_absolute_url() }}'>{{ area.name }}</a>&nbsp;&nbsp;
+        {% endfor %}
+        <br><br><br><br>
+    </div>
+{% endblock content %}

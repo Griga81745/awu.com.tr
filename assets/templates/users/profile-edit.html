@@ -22,60 +22,52 @@
 		                        <i class="fas fa-camera"></i>&nbsp;
 		                        Profil Fotoğrafınızı Aşağıda Seçiniz
 	                        </span>
-	                        <img id="pic" style="max-height: 400px; width: 100%; object-fit: cover;z-index: 3 ;position: relative" class="img-fluid">
+	                        <img 
+								id="pic" 
+								src="{{object.avatar.url}}"
+								style="max-height: 400px; width: 100%; object-fit: cover;z-index: 3 ;position: relative" 
+								class="img-fluid"/>
 	                    </div>
-	                    <div class="main_info_wrapper">
-	                    	<div class="row" style="margin-bottom:1em">
-	                    		<div class="col-md-6">
-			                    	<div style="margin-bottom:1em">
-			                    		<label>Adınız</label>
-					                    <input type="text" class="custom-input" value="example">
-			                    	</div>
-			                    	<label class="container_check">
-			                    		Bedave Konsultasyon
-	                                    <input type="checkbox">
-	                                    <span class="checkmark"></span>
-	                                </label>
-	                    		</div>
-	                    		<div class="col-md-6">
-	                    			<div style="margin-bottom:1em">
-			                    		<label>Profil Fotografınız</label>
-					                    <input type="file" class="custom-input" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-			                    	</div>
-	                    		</div>
-	                    	</div>
-	                    	<div style="margin-bottom:1em">
-	                    		<label for="">Hakkınızda</label>
-	                    		<textarea name="" id="" cols="30" rows="10" class="custom-input">
-	                    			
-	                    		</textarea>
-	                    	</div>
-	                    	<a href="#0" class="btn_1 full-width booking">Kaydet</a>
-	                    </div>
+	                    <form method="post" class="main_info_wrapper" enctype="multipart/form-data">
+							<div class="row">
+								{% for field in form %}	
+									{% if field.widget_type=='checkbox' %}
+										<div class="col-md-12">
+											<label class="container_check" style="margin-bottom:1em">
+												{{ field.label }}
+												{{ field }}
+												<span class="checkmark"></span>
+											</label>
+										</div>
+									{% elif field.widget_type=='textarea' %}
+										<div class="col-md-12">
+											<div style="margin-bottom:1em">
+												{{ field.label }}:
+												{{ field }}
+											</div>
+										</div>
+									{% else %}
+										<div class="col-md-6">
+											<div style="margin-bottom:1em">
+												{% if field.name == 'avatar' %}
+													{{ field.field.widget.attrs.update({'onchange':'pic.src=window.URL.createObjectURL(this.files[0])'}) }}
+												{% endif %}
+												{{ field.label }}:
+												{{ field }}
+											</div>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+							{{ csrf_input }}
+	                    	<button type="submit" class="btn_1 full-width booking">Kaydet</button>
+	                    </form>
 	                    <!-- /main_info -->
 	                </div>
 	            </div>
 	            <!-- /col -->
 	            <div class="col-xl-4 col-lg-5 col-12" id="sidebar_fixed">
-	                <div class="box_booking mobile_fixed--custom" style="padding: 0.5em">
-	                     <div class="head">
-	                        <h3>Hesap Ayarları</h3>
-	                        <a href="#0" class="close_panel_mobile"><i class="icon_close"></i></a>
-	                    </div>
-	                	<a class="custom-sidebar-button" href="#" style="margin-bottom:0.5em;">
-	                		<i class="fas fa-user"></i>
-	                		&nbsp;Hesap Bilgileri
-	                	</a>
-	                	<a class="custom-sidebar-button" href="#" style="margin-bottom:0.5em;">
-	                		<i class="fas fa-key"></i>
-	                		&nbsp;Parola Yönetimi
-	                	</a>
-	                	<a class="custom-sidebar-button" href="#" style="margin-bottom:0.5em;">
-	                		<i class="fas fa-sign-out"></i>
-	                		&nbsp;Çıkış Yap
-                		</a>
-	                </div>
-	                <!-- /box_booking -->
+	                {% include 'users/template-parts/profile-edit-sidebar.html' %}
 	            </div>
 	        </div>
 	        <!-- /row -->
