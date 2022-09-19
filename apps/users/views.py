@@ -79,12 +79,13 @@ class SearchView(FilterView):
 
   @property
   def filter_params(self):
-    # print(dir(self.request.GET))
     params = self.request.GET
     print(list(params.lists()))
-    # print([ (i,params[i]) for i in params])
-    # print([item for item in self.request.GET.items()])
-    return '&'.join([ f'{item[0]}={item[1]}' for item in filter(lambda item: item[0]!='page',self.request.GET.items()) ])
+    return '&'.join([ 
+      f'{item[0]}={item[1]}' for item 
+      in filter(lambda item: item[0]!='page',self.request.GET.lists()) 
+    ])
+
 
 class ProfileDetailView(generic.DetailView):
   model = models.User

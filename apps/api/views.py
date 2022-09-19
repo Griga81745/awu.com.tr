@@ -1,7 +1,4 @@
-from .models import Ticket
-
-from apps.users.models import User
-
+from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
 
 from rest_framework import status as response_status
@@ -13,21 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
 
-class GetTicket(APIView):
-  permission_classes = [IsAuthenticated]
+User = get_user_model()
 
-  def get(self, request: Request) -> Response:
-    user = request.user
-
-    if (ticket := Ticket.objects.filter(user=user)):
-      ticket.delete()
-
-    ticket = Ticket.objects.create(
-      user=user,
-      ticket=get_random_string(32)
-    )
-
-    return Response({'ticket': ticket.ticket})
 
 class ToggleFavorite(APIView):
   '''

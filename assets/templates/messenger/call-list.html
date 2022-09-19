@@ -1,0 +1,70 @@
+{% extends 'messenger/base.html' %}
+
+{% block content %}
+    <!-- start chat-leftsidebar -->
+    <div class="chat-leftsidebar">
+        <div class="tab-content">
+            <!-- Start calls tab-pane -->
+            <div class="tab-pane show active"
+                id="pills-calls"
+                role="tabpanel"
+                aria-labelledby="pills-calls-tab">
+                <!-- Start Contact content -->
+                <div>
+                    <div class="px-4 pt-4">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h4 class="mb-3">
+                                    Aramalar
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end p-4 -->
+                    <!-- Start contact lists -->
+                    <div class="chat-message-list chat-call-list" data-simplebar>
+                        <ul class="list-unstyled chat-list" id="callList">
+                            <li id="calls-id-2">        
+                                <div class="d-flex align-items-center">        
+                                    <div class="chat-user-img flex-shrink-0 me-2">            
+                                        <img src="{{ static('messenger/') }}images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="">       
+                                    </div>            
+                                <div class="flex-grow-1 overflow-hidden">                
+                                    <p class="text-truncate mb-0">Steven Jury</p>                
+                                    <div class="text-muted font-size-12 text-truncate">
+                                        <i class="ri-arrow-right-up-fill text-danger align-bottom"></i> 
+                                        13 Aug, 2021, 06:45PM
+                                    </div>           
+                                </div>            
+                                <div class="flex-shrink-0 ms-3">                
+                                    <div class="d-flex align-items-center gap-3">                    
+                                        <div>                        
+                                            <h5 class="mb-0 font-size-12 text-muted">01:02</h5>                   
+                                        </div>                    
+                                        <div>                       
+                                            <button type="button" class="btn btn-link p-0 font-size-20 stretched-link" data-bs-toggle="modal" data-bs-target=".audiocallModal">
+                                                <i class="bx bxs-phone-call align-middle"></i>
+                                            </button>                   
+                                        </div>               
+                                    </div>                  
+                                </div>     
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end contact lists -->
+                </div>
+                <!-- Start Contact content -->
+            </div>
+            <!-- End calls tab-pane -->
+            {% include 'messenger/template-parts/favorites.html' %}
+        </div>
+        <!-- end tab content -->
+    </div>
+    <!-- end chat-leftsidebar -->
+    <!-- Start User chat -->
+    <div class="user-chat w-100 overflow-hidden">
+        <div class="user-chat-overlay">
+        </div>
+    </div>
+    <!-- End User chat -->
+{% endblock content %}

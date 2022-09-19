@@ -1,0 +1,79 @@
+<div class="chat-leftsidebar">
+    <div class="tab-content">
+        <!-- Start chats tab-pane -->
+        <div class="tab-pane show active"
+            id="pills-chat"
+            role="tabpanel"
+            aria-labelledby="pills-chat-tab">
+            <!-- Start chats content -->
+            <div>
+                <div class="px-4 pt-4">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1">
+                            <h4 class="mb-4">
+                                Sohbetler
+                            </h4>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text"
+                                class="form-control bg-light border-0 pe-0"
+                                id="serachChatUser"
+                                onkeyup="searchUser()"
+                                placeholder="Search here.."
+                                aria-label="Example text with button addon"
+                                aria-describedby="searchbtn-addon"
+                                autocomplete="off">
+                            <button class="btn btn-light" type="button" id="searchbtn-addon">
+                                <i class='bx bx-search align-middle'></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- .p-4 -->
+                <div class="chat-room-list" data-simplebar>
+                    <!-- Start chat-message-list -->
+                    <div class="chat-message-list">
+                        <ul class="list-unstyled chat-list chat-user-list" id="usersList">
+                            {% for chat in request.user.chats.all() %}
+                                {% set participant = chat.participants.exclude(id=request.user.id).first() %}
+                                <li 
+                                    id="{% if peer_id!=participant.id %}messengerChat{{participant.id}}{% endif %}" 
+                                    class="{% if peer_id==participant.id %}active{% endif %}">                  
+                                    <a href="{{ url('messenger:chat', kwargs={'peer_id' : participant.id}) }}" onclick="mobileToggleChat()">                       
+                                        <div class="d-flex align-items-center">                          
+                                            <div class="chat-user-img online align-self-center me-2 ms-0">                              
+                                                <img src="{{ participant.avatar.url }}" class="rounded-circle avatar-xs" alt="" style="object-fit:cover">
+                                                <span class="user-status {% if peer_id==participant.id %}peerOnlineDot{% endif %}" style="opacity:0"></span>                          
+                                            </div>                          
+                                            <div class="overflow-hidden">                              
+                                                <p class="text-truncate mb-0">{{ participant.full_name }}</p>                          
+                                            </div>
+                                            <div class="ms-auto">
+                                                {% if chat.unseen %}
+                                                    <span class="badge badge-soft-dark rounded p-1">
+                                                        {{ chat.unseen }}
+                                                    </span>
+                                                {% else %}
+                                                    <span class="badge badge-soft-dark rounded p-1" style="display:none">
+                                                        {{ chat.unseen }}
+                                                    </span>
+                                                {% endif %}
+                                            </div>                                                  
+                                        </div>                  
+                                    </a>              
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- End chat-message-list -->
+                </div>
+            </div>
+            <!-- Start chats content -->
+        </div>
+        <!-- End chats tab-pane -->
+        {% include 'messenger/template-parts/favorites.html' %}
+    </div>
+    <!-- end tab content -->
+</div>

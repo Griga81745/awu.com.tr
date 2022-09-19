@@ -33,7 +33,6 @@ class Area(models.Model):
         return f'{self.name} ({self.user_set.count()})'
 
 
-
 class User(AbstractUser):
 
     LIMIT_FAVORITES = 30
@@ -126,7 +125,7 @@ class Review(models.Model):
         verbose_name = 'eleştiri'
         verbose_name_plural = 'eleştirilerr'
 
-    def save(self, *args: Tuple, **kwargs: Dict) -> None:
+    def save(self, *args, **kwargs):
 
         if self.__class__.objects.filter(owner=self.owner, destination=self.destination) and not self.__class__.objects.filter(id=self.id):
             raise ValidationError("İki kere yorum yapamazsınız !")

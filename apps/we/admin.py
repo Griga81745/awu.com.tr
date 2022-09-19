@@ -14,3 +14,5 @@ class FAQAdmin(admin.ModelAdmin):
   list_display = ('title',)
   list_filter = ('id',)
 
+admin.site.register(models.SiteSettings)
+

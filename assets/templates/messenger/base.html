@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta content="Doot - Responsive Chat App Template in HTML. A fully featured HTML chat messenger template in Bootstrap 5"
+              name="description"/>
+        <meta name="keywords"
+              content="Doot chat template, chat, web chat template, chat status, chat template, communication, discussion, group chat, message, messenger template, status"/>
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ static('messenger/images/favicon.ico') }}" id="tabIcon">
+        <!-- glightbox css -->
+        <link rel="stylesheet" href="{{ static('messenger/libs/glightbox/css/glightbox.min.css') }}">
+        <!-- swiper css -->
+        <link rel="stylesheet" href="{{ static('messenger/libs/swiper/swiper-bundle.min.css') }}">
+        <!-- CSS only -->
+        <link href="{{ static('messenger/css/bootstrap.min.css') }}"
+              id="bootstrap-style"
+              rel="stylesheet"
+              type="text/css"/>
+        <!-- Icons Css -->
+        <link href="{{ static('messenger/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{ static('messenger/css/app.min.css') }}"
+              id="app-style"
+              rel="stylesheet"
+              type="text/css"/>
+        <link href="{{ static('messenger/css/custom.css') }}" id="custom-style" rel="stylesheet" type="text/css"/>
+        {% block custom_styles %}
+        {% endblock custom_styles %}
+    </head>
+    <body>
+        <div class="layout-wrapper d-lg-flex">
+            {% include 'messenger/template-parts/side-menu.html' %}
+        </div>
+        <!-- end left sidebar-menu -->
+        {% block content %}
+        {% endblock content %}
+        {% include 'messenger/template-parts/modal-contact.html' %}
+        {% include 'messenger/template-parts/modal-forward.html' %}
+        {% include 'messenger/template-parts/modal-audiocall.html' %}
+        {% include 'messenger/template-parts/modal-videocall.html' %}
+    </div>
+    <!-- end  layout wrapper -->
+    {{ json_script(request.user.id,'current-id') }}
+    <script src="{{ static('messenger/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ static('messenger/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ static('messenger/libs/node-waves/waves.min.js') }}"></script>
+    <!-- glightbox js -->
+    <script src="{{ static('messenger/libs/glightbox/js/glightbox.min.js') }}"></script>
+    <!-- Swiper JS -->
+    <script src="{{ static('messenger/libs/swiper/swiper-bundle.min.js') }}"></script>
+    <!-- fg-emoji-picker JS -->
+    <script src="{{ static('messenger/libs/fg-emoji-picker/fgEmojiPicker.js') }}"></script>
+    <!-- page init -->
+    <script src="{{ static('messenger/js/app.js') }}"></script>
+    <script src="{{ static('messenger/js/custom.js') }}"></script>
+    {% block custom_scripts %}{% endblock custom_scripts %}
+</body>
+</html>

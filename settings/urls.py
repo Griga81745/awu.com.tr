@@ -6,10 +6,10 @@ from django.urls import path, include
 urlpatterns = [
   path('admin/', admin.site.urls),
   path('', include('apps.users.urls')),
+  path('api/', include('apps.api.urls')),
   path('we/', include('apps.we.urls')),
   path('blog/', include('apps.posts.urls')),
-
-  path('api/', include('apps.api.urls'))
+  path('messenger/', include('apps.messenger.urls')),
 ]
 
 handler404 = "settings.views.page_404"

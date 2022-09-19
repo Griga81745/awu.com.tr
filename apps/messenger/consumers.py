@@ -1,88 +1,106 @@
-from . import serializers, models
-from . import mixins as custom_mixins
-from django.contrib.auth import get_user_model
-
-from typing import Dict
+import json
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import JsonWebsocketConsumer
+from channels.generic.websocket import WebsocketConsumer
+from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+from . import models
 
-class ChatConsumer(custom_mixins.JsonParser, JsonWebsocketConsumer):
-  ''' Консьюмер, который обрабатывает все сокет-подключения '''
+class ChatConsumer(WebsocketConsumer):
+    
+    chat_group_prefix = lambda chat_id : f'chat_{chat_id}'
 
-  def connect(self) -> None:
-    ''' Когда пользователь подключился '''
+    def connect(self):
 
-    self.user: User = self.scope['user']  # Вытащить из скоупа (типа как request)
-    # Оно автоматом AuthMiddlewareStack из asgi.py логинит пользователя дефолтным путём через куки
+        self.user = self.scope['user'] 
+        self.peer = User.objects.filter(id=self.scope['url_route']['kwargs']['peer_id']).first()
 
-    if not self.user.is_authenticated:
-      return self.close(code=403)  # Если пользователя не вышло получить из куки
+        if (
+            not self.user.is_authenticated or
+            not self.peer or
+            self.user == self.peer
+        ):
+            self.close()
 
-    self.group_name = str(self.user.id)  # Название группы
-    # Так как сообщение приходит одному пользователю, вся группа будет состоять из одного пользователя
-    # на момент, когда пользователь подключился. Сообщение будет отправляться в группу пользователя и потом пересылаться через сокет
-    # Если бы писали чат-комнату, то group_name был бы названием чата и все пользователи в группе получали бы сообщение (то о чём я говорила)
+        self.chat = models.Chat.objects\
+            .filter(participants__in=[self.user])\
+            .filter(participants__in=[self.peer])\
+            .first()
+        
+        self.chat_id = self.chat.id
 
-    async_to_sync(self.channel_layer.group_add)(  # Добавить пользователя в группу (если группа с пользователем существует, значит пользователь онлайн)
-      self.group_name,
-      self.channel_name
-    )
+        self.chat.messages.filter(sender=self.peer).update(seen=True)
 
-    self.accept()  # Принять соединение
+        for chat in self.user.chats.all():
 
-  def disconnect(self, code):
-    if not self.scope['user'].is_authenticated:
-      return
+            async_to_sync(self.channel_layer.group_add)(
+                self.chat_group_prefix(chat.id),
+                self.channel_name
+            )
 
-    async_to_sync(self.channel_layer.group_discard)(  # Если пользователь отключился от сокета, значит его нужно удалить из группы (оффлайн)
-      self.group_name,
-      self.channel_name
-    )
+            async_to_sync(self.channel_layer.group_send)(
+                self.chat_group_prefix(self.chat_id),
+                {
+                    'type': 'peer_online',
+                    'peer_id': self.user.id,
+                    'status': True
+                }
+            )
 
-  def receive_json(self, content):
-    serializer = serializers.NewMessageSerializer(data=content)  # DRF для валидации входящего JSON, ещё DRF нужен будет в проекте для REST'а
+        self.accept()
 
-    if not serializer.is_valid():
-      return self.send_json({'status': 'error', **serializer.errors})  # Отправить по сокету ошибки, frontend ловит status: либо ок, либо error. Тект ошибки также можно использовать
+    def disconnect(self, close_code):
 
-    chat: models.Chat = serializer.chat
-    all_participants = chat.participants.all()  # Получить всех участников чата (будут всего 2)
+        async_to_sync(self.channel_layer.group_send)(
+            str(self.chat_id),
+            {
+                'type': 'peer_online',
+                'peer_id': self.user.id,
+                'status': False
+            }
+        )
 
-    if self.user not in all_participants:  # Если пользователя нет в чате (валидация на дурака)
-      return self.send_json({'status': 'error', 'message': 'User does not participate the chat'})
+        async_to_sync(self.channel_layer.group_discard)(
+            self.chat_group_prefix(self.chat_id),
+            self.channel_name
+        )
 
-    text = serializer.validated_data['text']
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        message_text = text_data_json['message']
 
-    models.Message.objects.create(
-      sender=self.user,
-      chat=chat,
-      text=text
-    )
+        message = models.Message.objects.create(
+            chat=self.chat,
+            sender=self.user,
+            text=message_text
+        )
 
-    for participant in all_participants:
+        async_to_sync(self.channel_layer.group_send)(
+            self.chat_group_prefix(self.chat_id),
+            {
+                'type': 'new_message',
+                'message': message_text,
+                'peer_id': self.user.id,
+                'sent_datetime': message.sent_datetime_str
+            }
+        )
 
-      if participant == self.user:  # Отправка всем пользователям чата, кроме отправителя (всего один получатель)
-        continue
+    def new_message(self, event):
 
-      # Если получатель онлайн (есть в группе), в его консьюмер прилетает event с chat_id и text, потом отправляется по сокету на frontend
-      # но если пользователь оффлайн, то ничего не происходит
-      async_to_sync(self.channel_layer.group_send)(
-        str(participant.id),
-        {
-          'type': 'chat_message',
-          'chat_id': chat.id,
-          'text': text
-        }
-      )
+        self.send(text_data=json.dumps({
+            'type': 'new_message',
+            'message': event['message'],
+            'peer_id': event['peer_id'],
+            'sent_datetime': event['sent_datetime']
+        }))
 
-    # Ответ после отправки сообщения. Таким образом ты можешь сделать иконку у сообщения "отправка", а когда получишь "ok", можешь поставить иконку "отправлено"
-    self.send_json({'status': 'ok', 'chat_id': chat.id})
+    def peer_online(self, event):
 
-  def chat_message(self, event: Dict) -> None:
-    ''' Если в консьюмер прилетает событие из другого консьюмера, то вызывается эта функция
-        Сообщение отправляется по сокету на frontend '''
+        if event['peer_id'] == self.user.id : return
 
-    self.send_json({'event': 'new_message', **event})
+        self.send(text_data=json.dumps({
+            'type': 'peer_online',
+            'peer_id': event['peer_id'],
+            'status': event['status'],
+        }))

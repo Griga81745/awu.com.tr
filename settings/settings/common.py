@@ -15,6 +15,7 @@ DEBUG = int(env('DEBUG'))
 INSTALLED_APPS = [
   'channels',
   'rest_framework',
+  'corsheaders',
   'django_filters',
   'django.contrib.admin',
   'django.contrib.auth',
@@ -23,16 +24,17 @@ INSTALLED_APPS = [
   'django.contrib.messages',
   'django.contrib.staticfiles',
 
+  'apps.api',
   'apps.we',
   'apps.users',
   'apps.posts',
-  'apps.messenger.apps.MessengerConfig',
-  'apps.api.apps.ApiConfig'
+  'apps.messenger'
 ]
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
+  'corsheaders.middleware.CorsMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -46,7 +48,10 @@ ASGI_APPLICATION = 'settings.asgi.application'
 TEMPLATES = [
   {
     "BACKEND": "django.template.backends.jinja2.Jinja2",
-    "DIRS": [BASE_DIR / 'assets/templates'],
+    "DIRS": [
+      BASE_DIR / 'assets/templates',
+      BASE_DIR / 'assets/templates-chat'
+    ],
     "APP_DIRS": True,
     "OPTIONS": {
       "environment": "settings.jinja2.environment",
@@ -107,6 +112,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 CSRF_TRUSTED_ORIGINS=['https://avvu.com.tr']
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_CREDENTIALS = True
 
 LOGIN_REDIRECT_URL = 'users:home'
 		

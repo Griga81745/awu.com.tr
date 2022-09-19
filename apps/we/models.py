@@ -1,5 +1,21 @@
 from django.db import models
 
+class SingletonModel(models.Model):
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
 
 class FAQ(models.Model):
     title = models.CharField('başlık', max_length=30)
@@ -18,3 +34,6 @@ class Media(models.Model):
     class Meta:
         verbose_name = 'medya hesabı'
         verbose_name_plural = 'medya hesapları'
+
+class SiteSettings(SingletonModel):
+    support_email = models.EmailField(default='support@example.com')

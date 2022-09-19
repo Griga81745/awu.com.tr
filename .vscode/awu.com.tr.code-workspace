@@ -1,16 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "../assets"
-		},
-		{
 			"path": "../settings"
 		},
 		{
-			"path": "../apps/messenger"
+			"path": "../apps/api"
 		},
 		{
-			"path": "../apps/api"
+			"path": "../apps/messenger"
 		},
 		{
 			"path": "../apps/posts"

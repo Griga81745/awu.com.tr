@@ -5,10 +5,12 @@
             switch (response.status){
                 case 201:
                     element.classList.add('active')
+                    break;
                 case 406:
                 case 204:
                 default:
                     element.classList.remove('active')
+                    break;
             }
         }).catch((error)=>{
             alert('Sitede sorun oluştu.')
