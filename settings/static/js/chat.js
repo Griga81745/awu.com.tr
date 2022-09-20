@@ -86,12 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chatSocket.onmessage = (e) => {
         const data = JSON.parse(e.data);
+        console.log(data)
+        console.log(peerID)
+        console.log(currentID)
 
         switch (data.type)
         {
             case 'new_message': 
             {
-                if (peerID === data.peer_id)
+                if (peerID === data.peer_id || currentID === data.peer_id)
                 {
                     // if there is active chat
                     document.querySelector('#users-conversation').insertAdjacentHTML(
@@ -121,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (peerID === data.peer_id)
                 {
+                    console.log(document.getElementsByClassName(currentPeerOnlineTextClass))
                     document.getElementsByClassName(currentPeerOnlineTextClass)
                         .forEach(element => element.innerHTML = data.status ? online_text : offline_text)
                     document.querySelectorAll(currentPeerOnlineDotClass)

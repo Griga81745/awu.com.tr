@@ -9,7 +9,7 @@ User = get_user_model()
 
 class ChatConsumer(WebsocketConsumer):
     
-    chat_group_prefix = lambda chat_id : f'chat_{chat_id}'
+    chat_group_prefix = lambda self,chat_id : f'chat_{chat_id}'
 
     def connect(self):
 
@@ -53,7 +53,7 @@ class ChatConsumer(WebsocketConsumer):
     def disconnect(self, close_code):
 
         async_to_sync(self.channel_layer.group_send)(
-            str(self.chat_id),
+            self.chat_group_prefix(self.chat.id),
             {
                 'type': 'peer_online',
                 'peer_id': self.user.id,
