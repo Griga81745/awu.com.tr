@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 from . import models
 
-User = get_user_model
+User = get_user_model()
 
 class ChatConsumer(WebsocketConsumer):
     
