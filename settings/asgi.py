@@ -5,12 +5,13 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.settings'
+asgi_application = get_asgi_application()
+
 from apps.messenger.routing import websocket_urlpatterns as messenger
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.settings'
-
 application = ProtocolTypeRouter({
-  'http': get_asgi_application(),
+  'http': asgi_application,
   'websocket': AllowedHostsOriginValidator(
     AuthMiddlewareStack(
       URLRouter(messenger)
