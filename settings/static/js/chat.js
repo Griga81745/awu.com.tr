@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const chatSocket = new WebSocket(
-        'ws://'
+        `${location.protocol==='https'?'wss':'ws'}://`
         + window.location.host
         + '/ws/chat/'
         + peerID
