@@ -12,7 +12,9 @@ from apps.messenger.routing import websocket_urlpatterns as messenger
 
 application = ProtocolTypeRouter({
   'http': asgi_application,
-  'websocket': AuthMiddlewareStack(
-    URLRouter(messenger)
+  'websocket': AllowedHostsOriginValidator(
+    AuthMiddlewareStack(
+      URLRouter(messenger)
+    )
   )
 })
