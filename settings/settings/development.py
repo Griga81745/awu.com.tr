@@ -1,5 +1,3 @@
-from .common import *
-
 SECRET_KEY = 'secret-key'
 ALLOWED_HOSTS = ['*']
 
